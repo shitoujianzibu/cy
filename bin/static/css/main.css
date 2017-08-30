@@ -1,0 +1,135 @@
+body{
+	background-color: rgba(170, 170, 170, 0.2);
+	min-width: 1250px;
+}
+
+.cy_line {
+	display: inline-block;
+}
+
+.cy_blk {
+	display: block;
+}
+.cy_exit {
+	margin-right: 24px
+}
+
+.cy_radius {
+	border-radius: 5px
+}
+
+.cy_main {
+	width: 90%;
+	height: 100%;
+	vertical-align: top;
+	float: left;
+	/*background-color: rgba(160,160,160,0.25);*/
+}
+.no-padding{
+	padding: 0;
+}
+.cy_main .path {
+	height: 40px;
+	font-family: AdobeHeitiStd Regular; 
+	font-size: 11px;
+	color: #999999;
+	padding: 10px 0px 0px 10px; 
+	/*width: 800px;*/
+}
+
+.cy_main .cy_white {
+	width: 100%;
+	background-color: #fff;
+	margin-left: 10px;
+	padding: 10px 0 100px 0;
+}
+/*.cy_white {*/
+	/*padding: 0 100px;*/
+/*}*/
+.cy_white form {
+	padding-top: 40px; 
+}
+
+.statistical-box-wrapper {
+	overflow: hidden;
+}
+.statistical-box1 {
+	width: 33%;
+	float: left;
+}
+.myChart-wrapper{
+	margin: 0 auto;
+	padding: 0px 50px;
+}
+/*日期选择的背景*/
+.datapicker{
+	background-image: url('/manage/static/img/datapicker.png');
+	background-repeat: no-repeat;
+	background-position: 147px 7px;
+	-webkit-background-size: 20px 20px;
+	background-size: 20px 20px;
+}
+/*搜索按钮的样式*/
+.search-btn {
+	height: 30px;
+	width: 80px;
+	color: #5d5d5d;
+	font-family:MyriadPro Regular ;
+	background-color: rgba(136, 171, 218, 1);
+	border-radius: 3px;
+	border-color: #ccc;
+}
+/*分页样式*/
+#lay-page {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -285px;
+}
+.layui-laypage {
+	text-align: center !important;
+}
+.layui-laypage-curr .layui-laypage-em {
+	background-color: #3b3b3b !important ;
+	height: 22px !important;
+	width: 9px !important;
+	padding: 0px 8px !important;
+}
+.layui-laypage a, .layui-laypage span {
+	background-color: #efefef !important;
+	border: 1px solid #b7b7b7 !important;
+	padding: 0px 8px !important;
+	height: 21px !important;
+	line-height: 24px !important;
+}
+.layui-laypage select{
+	padding: 0 !important;
+	height: 18px !important;
+}
+.layui-laypage button, .layui-laypage input{
+	height: 21px !important;
+	line-height: 21px !important;
+	background-color: #B3B3B3 !important;
+}
+
+
+#cy_bk_login {
+    background: -webkit-radial-gradient(#91a5b0, #698088, #435c61); /* Safari 5.1 - 6.0 */
+    background: -o-radial-gradient(#91a5b0, #698088, #435c61); /* Opera 11.6 - 12.0 */
+    background: -moz-radial-gradient(#91a5b0, #698088, #435c61); /* Firefox 3.6 - 15 */
+    background: radial-gradient(#91a5b0, #698088, #435c61); /* 标准的语法（必须放在最后） */
+}
+
+.dark {
+	background:rgba(160,160,160,0.7);
+}
+
+.cy_cap {
+	border-radius: 5px 5px 0px 0px; 
+	height: 40px; 
+	background-color: #f06666;
+	font-family: AdobeHeitiStd Regular;
+	font-size: 14px;
+	color: #fefefe;
+}
+

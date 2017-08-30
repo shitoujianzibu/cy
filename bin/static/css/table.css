@@ -1,0 +1,10 @@
+.table {
+    width: 90%;
+    margin: 0 auto;
+}
+.table thead {
+    background: #bfbfbf;
+}
+.table-top {
+    margin-top: 44px;
+}

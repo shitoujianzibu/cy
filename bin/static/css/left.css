@@ -1,0 +1,52 @@
+/*左侧导航栏*/
+.cy_left {
+    float: left;
+    background-color: rgba(160,160,160,0.25);
+    width: 178px;
+    font-family: AdobeHeitiStd Regular;
+    font-size: 14px;
+    color: #808080;
+    cursor: pointer;
+}
+cy_left>li {
+    border-radius: 10px;
+}
+.for-left-item {
+    border-radius: 10px;
+}
+.for-left-item>span{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+    margin-left: 12px;
+}
+.for-left {
+    display: none;
+    background-color: rgba(160, 160, 160, .74);
+}
+.active-item{
+    background-color: rgba(160, 160, 160, 1);
+}
+.cy_left div {
+    border-bottom: 1px solid rgba(170, 170, 170, 0.73);
+    width: 178px;
+    border-radius: 5px;
+}
+.cy_left div img {
+    margin: 7px 0px 8px 15px;
+    display: inline-block;
+    vertical-align: top;
+    width: 25px;
+    height:25px;
+    border: none;
+    outline: none;
+}
+
+.cy_left div span
+{
+    padding: 12px 10px 8px 30px;
+    display: inline-block;
+    vertical-align: top;
+}

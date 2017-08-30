@@ -1,0 +1,52 @@
+.topboard {
+    height: 55px;
+    background-color: #db5757;
+}
+/*头部上端左侧*/
+.cy_title_left {
+    float: left;
+    width: 178px;
+    height: 55px;
+    background-color: rgba(219, 117, 117, 1);
+}
+.cy_title_left img{
+    margin: 15px 0 0 20px;
+}
+.cy_title_end{
+    margin-top: 5px;
+    font-family: AdobeHeitiStd Regular;
+    font-size: 20px;
+    color: #f2f2f2;
+}
+.text_end{
+    line-height: 22px;
+    margin-left: 5px;
+}
+/*头部上端右侧*/
+.cy_title_right {
+    float: right;
+    height: 55px;
+    font-size: 14px;
+    font-family: AdobeHeitiStd Regular;
+    color: #fff;
+}
+.cy_title_img{
+    width: 22px;
+    height: 22px;
+}
+.cy_title_right .cy_title_img {
+    margin: 4px 10px 0 0;
+}
+.cy_title_right span:nth-child(2){
+    margin-right: 16px;
+}
+.cy_title_right .cy_top {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 0;
+}
+.cy_title {
+    display: inline-block;
+    height: 55px;
+    width: 178px;
+}

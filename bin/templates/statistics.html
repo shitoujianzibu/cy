@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+{{template "header"}}
+</head>
+<body style="min-width: 1250px;">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+			{{template "top" .}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
+			{{template "left" .}}
+		</div>
+		<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
+			<div class="cy_main">
+				<!-- 上部导航 -->
+				<div id="path" class="path">
+					{{range .Path}}
+					<span>{{.}}</span>
+					{{end}}
+				</div>
+				<!-- 背景白框 -->
+				<div class="cy_radius cy_white">
+					<form class="form-inline">
+						<div class="form-group" style="padding-left: 60px;">
+							<div class="input-group">
+								<input class="date form-control datapicker laydate1" type="text" name="start" style="background-color: #fff" value="">
+							</div>
+						</div>
+						<div class="form-group" style="padding-left: 20px">
+							<div class="input-group">
+								<input class="date form-control datapicker laydate2" type="text" name="end"  style="background-color: #fff" value="">
+							</div>
+						</div>
+						<!-- 一个选择框 -->
+						<div class="form-group"  style="float: right;margin-right: 100px" >
+							<label>明细类型</label>
+							<select class="form-control" style="font-family: AdobeHeitiStd Regular;">
+								<option value="all">全部</option>
+								<option value="double_color">双色球</option>
+								<option value="fucai3d">福彩3d</option>
+								<option value="seven_happy">七乐彩</option>
+								<option value="shishicai">时时彩</option>
+								<option value="kuaisan">快3</option>
+							</select>
+						</div>
+					</form>
+					<!-- 三个统计框 -->
+					<div class="statistical-box-wrapper">
+						<div class="statistical-box1">
+							<div class="statistical-box" style="vertical-align: top; display: inline-block; width: 160px;height: 100px; background-color: #f8b551; margin:38px 0px 0px 150px; border-radius: 5px;">
+								<span style="display: block;text-align: center; padding-top: 20px;">投注量</span>
+								<span style="display: block;text-align: center; padding-top: 20px;">541568</span>
+							</div>
+						</div>
+						<div class="statistical-box1">
+							<div class="statistical-box" style="vertical-align: top; display: inline-block; width: 160px;height: 100px; background-color: #88abda; margin:38px 0px 0px 150px; border-radius: 5px;">
+								<span style="display: block;text-align: center;padding-top: 20px;">投注金额</span>
+								<span style="display: block;text-align: center; padding-top: 20px;">1083136</span>
+							</div>
+						</div>
+						<div class="statistical-box1">
+							<div class="statistical-box" style="vertical-align: top; display: inline-block; width: 160px;height: 100px; background-color: #eeb2b2; margin:38px 0px 0px 150px; border-radius: 5px;">
+								<span style="display: block;text-align: center;padding-top: 20px;">投注用户</span>
+								<span style="display: block;text-align: center; padding-top: 20px;">45135</span>
+							</div>
+						</div>
+
+
+					</div>
+
+					<!-- 一个图表 -->
+					<div class="myChart-wrapper">
+						<canvas id="myChart" width="300" height="100"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{template "footer"}}
+
+<script type="text/javascript">
+$(function () {
+    laydate.render({
+        elem: '.laydate1' //指定元素
+    });
+    laydate.render({
+        elem: '.laydate2' //指定元素
+    });
+	var ctx = $("#myChart").get(0).getContext("2d");
+    var bardata = {
+            labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
+            datasets : [{
+                label:"投注量",
+                backgroundColor : "rgba(220,220,220,0.5)",
+                borderColor : "rgba(220,220,220,1)",
+                data : [230000,600000,280000,400000,560000,900000,400000,80000]
+            }]
+        };
+        window.myBar = new Chart(ctx,{
+            type:'bar',
+            data:bardata,
+            option:{
+                elements:{
+                     rectangle: {
+                     	borderWidth:2,
+                         barWidth: 10
+                     }
+                },
+                 responsive:true,
+                 legend:{
+                 	position: 'right',
+                 },
+                 title:{
+                 	display:true,
+                 	text: 'chart.js h bar',
+                 },
+                series: {
+
+				}
+            }
+        })
+})
+</script>
+</body>
+</html>
