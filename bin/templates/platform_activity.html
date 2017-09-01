@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "header"}}
+    <style>
+        .sendprice-total{
+            margin: 40px 0 0 42%;
+            display: inline-block;
+            text-align: center;
+            padding-top: 26px;
+            line-height: 26px;
+            width: 160px;
+            height: 100px;
+            border-radius: 10px;
+            background-color: #00B7EE;
+            font-family: "AdobeHeitiStd Regular";
+            color: #fff;
+        }
+        .banner_wrapper li {
+            float: left;
+            margin-right: 2%;
+        }
+        .banner {
+            width: 220px;
+            height: 110px;
+            background-color: #eee;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body style="min-width: 1600px;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+            {{template "top" .}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
+            {{template "left" .}}
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
+            <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+                    {{range .Path}}
+                    <span>{{.}}</span>
+                    {{end}}
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white">
+                    <p>Banner 活动页面</p>
+                    <div class="banner_wrapper">
+                       <ul>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                       </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{{template "footer"}}
+
+<script type="text/javascript">
+    $(function () {
+
+    })
+</script>
+</body>
+</html>

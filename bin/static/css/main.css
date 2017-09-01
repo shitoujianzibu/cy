@@ -41,7 +41,7 @@ body{
 	width: 100%;
 	background-color: #fff;
 	margin-left: 10px;
-	padding: 10px 0 100px 0;
+	padding: 10px 0 0 0;
 }
 /*.cy_white {*/
 	/*padding: 0 100px;*/
@@ -65,7 +65,7 @@ body{
 .datapicker{
 	background-image: url('/manage/static/img/datapicker.png');
 	background-repeat: no-repeat;
-	background-position: 147px 7px;
+	background-position: 161px 6px;
 	-webkit-background-size: 20px 20px;
 	background-size: 20px 20px;
 }
@@ -78,11 +78,13 @@ body{
 	background-color: rgba(136, 171, 218, 1);
 	border-radius: 3px;
 	border-color: #ccc;
+	line-height: 15px;
 }
+
 /*分页样式*/
 #lay-page {
 	position: absolute;
-	bottom: 0;
+	bottom: -65px;
 	left: 50%;
 	margin-left: -285px;
 }
@@ -102,14 +104,24 @@ body{
 	height: 21px !important;
 	line-height: 24px !important;
 }
+.layui-laypage a:hover{
+	color: #b3b3b3 !important;
+}
 .layui-laypage select{
+	background-color: #efefef !important;
 	padding: 0 !important;
 	height: 18px !important;
 }
 .layui-laypage button, .layui-laypage input{
 	height: 21px !important;
 	line-height: 21px !important;
-	background-color: #B3B3B3 !important;
+	background-color: #efefef !important;
+}
+.layui-laypage input{
+	width: 30px !important;
+}
+.layui-laypage input:focus, .layui-laypage select:focus {
+	border-color: #b3b3b3 !important;
 }
 
 
@@ -120,6 +132,34 @@ body{
     background: radial-gradient(#91a5b0, #698088, #435c61); /* 标准的语法（必须放在最后） */
 }
 
+/*  bootstrap
+重置th水平居中*/
+th {
+	text-align: center !important;
+}
+/*修改垂直居中*/
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+	vertical-align: middle;
+}
+
+/*底部返回按钮样式*/
+.back-btn {
+	width: 130px;
+	height: 40px;
+	margin: 20px 0 0 43%;
+	border-radius: 10px;
+	background-color: #00a0e9;
+	color: #fff;
+	text-align: center;
+	line-height: 40px;
+	font-family: AdobeHeitiStd Regular;
+	font-size: 14px;
+	cursor: pointer;
+}
+/*select option 样式*/
+select option {
+	background-color: #fff;
+}
 .dark {
 	background:rgba(160,160,160,0.7);
 }

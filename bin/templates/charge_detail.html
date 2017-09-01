@@ -34,11 +34,11 @@
               </div>
               <button type="submit" class="btn  search-btn" style="float: right; margin-right: 100px">搜索</button>
               <div class="form-group" style="float: right; margin-right: 6px">
-                <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号">
+                <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="">
               </div>
             </form>
 
-            <table class="table table-bordered table-striped table-hover table-top">
+            <table class="table table-bordered table-striped table-hover table-top" style="text-align: center">
               <thead>
                 <tr>
                   <th>账号</th>
@@ -124,7 +124,7 @@
             laypage.render({
                 elem: 'lay-page'
                 ,count: 99
-                ,layout: [ 'prev', 'page', 'next', 'limit', 'skip']
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
                     console.log(obj)
                 }

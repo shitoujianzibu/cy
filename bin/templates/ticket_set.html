@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "header"}}
+    <style>
+        .cy_white {
+
+        }
+        .ticket-wrapper {
+            width: 100%;
+            font-family: AdobeHeitiStd Regular;
+            font-size: 14px;
+            color: #666;
+        }
+        /*彩种设置信息*/
+        .user-detail-msg {
+            height: 40px;
+            padding-left: 34px;
+            line-height: 40px;
+            border-top-right-radius: 5px ;
+            border-top-left-radius: 5px;
+            background-color: rgba(240, 102, 102, 1);
+        }
+
+        /*彩种设置*/
+        .ticket_set_wrapper{
+            width: 1000px;
+            /*background-color: #eee;*/
+            margin: 70px auto 100px;
+            overflow: hidden;
+        }
+        .ticket_set_wrapper > div {
+            width: 50%;
+            float: left;
+            margin-bottom: 60px;
+        }
+        /*.ticket_set_wrapper > div:nth-child(even){
+            padding-left: 80px;
+        }*/
+        .ticket_set_wrapper span{
+            margin-left: 20px;
+        }
+        .ticket_set_wrapper img{
+            width: 48px;
+            height: 48px;
+        }
+        /*彩种销售按钮*/
+        .ticket_set_wrapper .sell {
+            margin-left: 30px;
+            display: inline-block;
+            width: 160px;
+            height: 50px;
+            background-color: #a0a0a0;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            font-family: AdobeHeitiStd Regular ,sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .ticket_set_wrapper .start{
+            background-color: #00A0E9;
+        }
+        .ticket_set_wrapper .stop{
+            background-color: #a0a0a0
+        }
+    </style>
+</head>
+<body style="min-width: 1600px;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+            {{template "top" .}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
+            {{template "left" .}}
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
+            <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+
+                    <span>用户信息</span>&gt;<span>用户详情</span>
+
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white" style="padding: 0 0 10px 0;">
+                    <!--彩种设置-->
+                    <div class="ticket-wrapper">
+                        <!--彩种设置信息-->
+                        <div class="user-detail-msg" >
+                            <span style="color: #fefefe;margin-left: 10px" >彩种设置/开售设置</span>
+                        </div>
+                        <div class="ticket_set_wrapper">
+                            <div class="shuangseqiu">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="kuaisan">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="fucai3d">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="fucai3d">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="shishicai">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="shishicai">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="qilecai" style="margin-bottom: 0">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                            <div class="qilecai" style="margin-bottom: 0">
+                                <img src="/manage/static/img/double_color.png" alt="">
+                                <span>双色球</span>
+                                <div class="sell">
+                                    停止销售
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{template "footer"}}
+<script type="text/javascript">
+    $(function () {
+        $('.ticket_set_wrapper .sell').click(function () {
+            if ($(this).hasClass('start')) {
+
+                $(this).removeClass('start').addClass('stop').html('停止销售')
+            } else {
+                $(this).removeClass('stop').addClass('start').html('开始销售')
+            }
+        })
+    })
+</script>
+</body>
+</html>

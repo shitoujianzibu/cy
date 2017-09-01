@@ -8,7 +8,7 @@
 				</div>
 				<ul class="for-left">
 					<li id="statistics" class="for-left-item for_platdata">
-						<span>数据统计</span>
+						<span class="statisticas">数据统计</span>
 					</li>
 				</ul>
 			</li>
@@ -90,6 +90,7 @@
 					<img src="/manage/static/img/feedback.png"/>
 					<span>意见反馈</span>
 				</div>
+				<ul></ul>
 			</li>
 		</ul>
 		<!--<div id="platdata">
@@ -168,7 +169,11 @@
         })
 		var leftHeight = document.documentElement.clientHeight-55
 		$('.left-wrapper').css('height', leftHeight )
-        console.log();
+		$('.statisticas').click(function () {
+			$.get('http://localhost:8080/manage/statistics/', function (data) {
+				$(document.body).html(data)
+            })
+        })
     })
 
 </script>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "header"}}
+</head>
+<body style="min-width: 1250px;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+            {{template "top" .}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
+            {{template "left" .}}
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
+            <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+
+                    <span>用户信息</span>&gt;<span>用户详情</span>
+
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white">
+                    <!-- 日期和筛选 -->
+                    <form class="form-inline"style="overflow: hidden">
+                        <div class="form-group" style="float: left;margin-right: 6px;margin-left: 40%">
+                            <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="">
+                        </div>
+                        <button type="submit" class="btn  search-btn" style="float: left;">搜索</button>
+                    </form>
+
+                    <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center !important;" >
+                        <thead>
+                            <tr>
+                                <th>账户名称</th>
+                                <th>手机号</th>
+                                <th>账户余额</th>
+                                <th>账户收益</th>
+                                <th>注册时间</th>
+                                <th>身份信息</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mini">
+                        <!-- <tr>
+                           <td>{{.Tel}}</td>
+                           <td>{{.ID}}</td>
+                           <td>{{.Channel}}</td>
+                           <td>{{.Value}}</td>
+                           <td>{{.Data}}</td>
+                           <td>{{.Status}}</td>
+                         </tr>-->
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>25</td>
+                                <td>500</td>
+                                <td>17-4-3</td>
+                                <td>已完善</td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>25</td>
+                                <td>500</td>
+                                <td>17-4-3</td>
+                                <td>已完善</td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>25</td>
+                                <td>500</td>
+                                <td>17-4-3</td>
+                                <td>已完善</td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>25</td>
+                                <td>500</td>
+                                <td>17-4-3</td>
+                                <td>已完善</td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="lay-page"></div>
+                <!--<nav aria-label="Page navigation">
+                  <ul class="pagination pagination-sm">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li class="active"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>-->
+            </div>
+        </div>
+    </div>
+</div>
+{{template "footer"}}
+<script type="text/javascript">
+    $(function () {
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+        /*$('.cy_left').children('li').click(function () {
+            console.log($(this).children('div').children('span').text());
+        })*/
+    })
+</script>
+</body>
+</html>

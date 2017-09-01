@@ -8,8 +8,11 @@
     color: #808080;
     cursor: pointer;
 }
-cy_left>li {
+.cy_left>li {
     border-radius: 10px;
+}
+.cy_left>li>ul{
+    color: #fff;
 }
 .for-left-item {
     border-radius: 10px;
