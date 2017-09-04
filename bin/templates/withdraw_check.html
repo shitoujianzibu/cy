@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {{template "header"}}
+{{define "withdraw_check"}}
     <style>
         .tixianzhong{
             color: #ABE675;
@@ -13,20 +10,7 @@
             color: #FBB45C;
         }
     </style>
-</head>
-<body style="min-width: 1600px;">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-            {{template "top" .}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
-            {{template "left" .}}
-        </div>
-        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
-            <div class="cy_main">
+    <div class="cy_main">
                 <!-- 上部导航 -->
                 <div id="path" class="path">
                     {{range .Path}}
@@ -35,22 +19,22 @@
                 </div>
                 <!-- 背景白框 -->
                 <div class="cy_radius cy_white">
-                    <form class="form-inline">
+                    <form class="form-inline" method="">
                         <div class="form-group" style="padding-left: 72px;">
                             <div class="input-group">
-                                <input class="date form-control datapicker laydate1" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
+                                <input class="date form-control datapicker laydate7" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
                             </div>
                         </div>
                         至
                         <div class="form-group" style="padding-left: 20px">
                             <div class="input-group">
-                                <input class="date form-control datapicker laydate2" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
+                                <input class="date form-control datapicker laydate8" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
                             </div>
                         </div>
                         <!-- 一个选择框 -->
                         <div class="form-group"  style="margin-left: 50px" >
                             <label>提现状态</label>
-                            <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
+                            <select class="form-control" id="test" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
                                 <option value="all">全部</option>
                                 <option value="tixianzhong">提现中</option>
                                 <option value="shibai">失败</option>
@@ -126,36 +110,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="lay-page"></div>
+                <div id="lay-page-5" class="lay-page-default"></div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-
-{{template "footer"}}
-
-<script type="text/javascript">
-    $(function () {
-        laydate.render({
-            elem: '.laydate1' //指定元素
-        });
-        laydate.render({
-            elem: '.laydate2' //指定元素
-        });
-        layui.use('laypage', function(){
-            var laypage = layui.laypage;
-            //执行一个laypage实例
-            laypage.render({
-                elem: 'lay-page'
-                ,count: 99
-                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
-                ,jump: function(obj){
-                    console.log(obj)
-                }
-            });
-        });
-    })
-</script>
-</body>
-</html>
+{{end}}

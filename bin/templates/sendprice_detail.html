@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {{template "header"}}
+{{define "sendprice_detail"}}
     <style>
         .sendprice-total{
             margin: 40px 0 0 42%;
@@ -17,150 +14,107 @@
             color: #fff;
         }
     </style>
-</head>
-<body style="min-width: 1600px;">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-            {{template "top" .}}
+    <div class="cy_main">
+        <!-- 上部导航 -->
+        <div id="path" class="path">
+            {{range .Path}}
+            <span>{{.}}</span>
+            {{end}}
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
-            {{template "left" .}}
-        </div>
-        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
-            <div class="cy_main">
-                <!-- 上部导航 -->
-                <div id="path" class="path">
-                    {{range .Path}}
-                    <span>{{.}}</span>
-                    {{end}}
-                </div>
-                <!-- 背景白框 -->
-                <div class="cy_radius cy_white">
-                    <form class="form-inline">
-                        <div class="form-group" style="padding-left: 72px;">
-                            <div class="input-group">
-                                <input class="date form-control datapicker laydate1" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
-                            </div>
-                        </div>
-                        至
-                        <div class="form-group" style="padding-left: 20px">
-                            <div class="input-group">
-                                <input class="date form-control datapicker laydate2" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
-                            </div>
-                        </div>
-                        <!-- 彩种选择框 -->
-                        <div class="form-group"  style="margin-left: 28%" >
-                            <label>明细类型</label>
-                            <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
-                                <option value="all">全部</option>
-                                <option value="double_color">双色球</option>
-                                <option value="fucai3d">福彩3d</option>
-                                <option value="seven_happy">七乐彩</option>
-                                <option value="shishicai">时时彩</option>
-                                <option value="kuaisan">快3</option>
-                            </select>
-                        </div>
-                        <!--期次选择框-->
-                        <div class="form-group"  style="margin-left: 50px" >
-                            <label>期次</label>
-                            <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
-                                <option value="210212">210212</option>
-                                <option value="210212">210212</option>
-                                <option value="210212">210212</option>
-                                <option value="210212">210212</option>
-                                <option value="210212">210212</option>
-                                <option value="210212">210212</option>
-                            </select>
-                        </div>
-                    </form>
-                    <div class="sendprice-total">
-                        <p>500000</p>
-                        <p>中奖网派奖额度</p>
+        <!-- 背景白框 -->
+        <div class="cy_radius cy_white">
+            <form class="form-inline">
+                <div class="form-group" style="padding-left: 72px;">
+                    <div class="input-group">
+                        <input class="date form-control datapicker laydate13" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
                     </div>
-                    <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
-                        <thead>
-                            <tr>
-                                <th>中奖账号</th>
-                                <th>派奖彩种</th>
-                                <th>派奖期次</th>
-                                <th>中奖等级</th>
-                                <th>中奖金额</th>
-                                <th>税后奖金</th>
-                                <th>派奖时间</th>
-                            </tr>
-                            </thead>
-                            <tbody id="mini">
-                            <!-- <tr>
-                               <td>{{.Tel}}</td>
-                               <td>{{.ID}}</td>
-                               <td>{{.Channel}}</td>
-                               <td>{{.Value}}</td>
-                               <td>{{.Data}}</td>
-                               <td>{{.Status}}</td>
-                             </tr>-->
-                            <tr>
-                                <td>wx1234</td>
-                                <td>双色球</td>
-                                <td>2225</td>
-                                <td>一等奖</td>
-                                <td>1599</td>
-                                <td>2342</td>
-                                <td>324234</td>
-                            </tr>
-                            <tr>
-                                <td>wx1234</td>
-                                <td>双色球</td>
-                                <td>2225</td>
-                                <td>一等奖</td>
-                                <td>1599</td>
-                                <td>2342</td>
-                                <td>324234</td>
-                            </tr>
-                            <tr>
-                                <td>wx1234</td>
-                                <td>双色球</td>
-                                <td>2225</td>
-                                <td>一等奖</td>
-                                <td>1599</td>
-                                <td>2342</td>
-                                <td>324234</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
-                <div id="lay-page"></div>
+                至
+                <div class="form-group" style="padding-left: 20px">
+                    <div class="input-group">
+                        <input class="date form-control datapicker laydate14" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
+                    </div>
+                </div>
+                <!-- 彩种选择框 -->
+                <div class="form-group"  style="margin-left: 28%" >
+                    <label>明细类型</label>
+                    <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
+                        <option value="all">全部</option>
+                        <option value="double_color">双色球</option>
+                        <option value="fucai3d">福彩3d</option>
+                        <option value="seven_happy">七乐彩</option>
+                        <option value="shishicai">时时彩</option>
+                        <option value="kuaisan">快3</option>
+                    </select>
+                </div>
+                <!--期次选择框-->
+                <div class="form-group"  style="margin-left: 50px" >
+                    <label>期次</label>
+                    <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
+                        <option value="210212">210212</option>
+                        <option value="210212">210212</option>
+                        <option value="210212">210212</option>
+                        <option value="210212">210212</option>
+                        <option value="210212">210212</option>
+                        <option value="210212">210212</option>
+                    </select>
+                </div>
+            </form>
+            <div class="sendprice-total">
+                <p>500000</p>
+                <p>中奖网派奖额度</p>
             </div>
+            <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
+                <thead>
+                    <tr>
+                        <th>中奖账号</th>
+                        <th>派奖彩种</th>
+                        <th>派奖期次</th>
+                        <th>中奖等级</th>
+                        <th>中奖金额</th>
+                        <th>税后奖金</th>
+                        <th>派奖时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="mini">
+                    <!-- <tr>
+                       <td>{{.Tel}}</td>
+                       <td>{{.ID}}</td>
+                       <td>{{.Channel}}</td>
+                       <td>{{.Value}}</td>
+                       <td>{{.Data}}</td>
+                       <td>{{.Status}}</td>
+                     </tr>-->
+                    <tr>
+                        <td>wx1234</td>
+                        <td>双色球</td>
+                        <td>2225</td>
+                        <td>一等奖</td>
+                        <td>1599</td>
+                        <td>2342</td>
+                        <td>324234</td>
+                    </tr>
+                    <tr>
+                        <td>wx1234</td>
+                        <td>双色球</td>
+                        <td>2225</td>
+                        <td>一等奖</td>
+                        <td>1599</td>
+                        <td>2342</td>
+                        <td>324234</td>
+                    </tr>
+                    <tr>
+                        <td>wx1234</td>
+                        <td>双色球</td>
+                        <td>2225</td>
+                        <td>一等奖</td>
+                        <td>1599</td>
+                        <td>2342</td>
+                        <td>324234</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <div id="lay-page-8" class="lay-page-default"></div>
     </div>
-</div>
-</div>
-
-{{template "footer"}}
-
-<script type="text/javascript">
-    $(function () {
-        laydate.render({
-            elem: '.laydate1' //指定元素
-        });
-        laydate.render({
-            elem: '.laydate2' //指定元素
-        });
-        layui.use('laypage', function(){
-            var laypage = layui.laypage;
-            //执行一个laypage实例
-            laypage.render({
-                elem: 'lay-page'
-                ,count: 99
-                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
-                ,jump: function(obj){
-                    console.log(obj)
-                }
-            });
-        });
-    })
-</script>
-</body>
-</html>
+{{end}}

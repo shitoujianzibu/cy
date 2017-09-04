@@ -18,10 +18,10 @@
 					<span>用户信息</span>
 				</div>
 				<ul class="for-left">
-					<li class="for-left-item for_userinfo">
+					<li class="for-left-item for_userinfo" id="user_detail">
 						<span>用户详情</span>
 					</li>
-					<li class="for-left-item for_userinfo">
+					<li class="for-left-item for_userinfo" id="user_account_detail">
 						<span>用户账户详情</span>
 					</li>
 				</ul>
@@ -32,17 +32,17 @@
 					<span>彩票业务</span>
 				</div>
 				<ul class="for-left">
-					<li class="for-left-item for_lottery">
-						<span>出票详情</span>
+					<li class="for-left-item for_lottery" id="ticket_out">
+							<span>出票详情</span>
 					</li>
-					<li class="for-left-item for_lottery">
-						<span>中奖派奖</span>
+					<li class="for-left-item for_lottery" id="ticket_win">
+							<span>中奖派奖</span>
 					</li>
-					<li class="for-left-item for_lottery">
-						<span>彩种设置</span>
+					<li class="for-left-item for_lottery" id="ticket_set">
+							<span>彩种设置</span>
 					</li>
-					<li class="for-left-item for_lottery">
-						<span>追号管理</span>
+					<li class="for-left-item for_lottery" id="ticket_trace">
+							<span>追号管理</span>
 					</li>
 				</ul>
 			</li>
@@ -52,10 +52,10 @@
 					<span style=" ">用户提现</span>
 				</div>
 				<ul class="for-left">
-					<li class="for-left-item for_user_withdraw">
+					<li class="for-left-item for_user_withdraw" id="withdraw_check">
 						<span>提现审核</span>
 					</li>
-					<li class="for-left-item for_user_withdraw">
+					<li class="for-left-item for_user_withdraw" id="withdraw_succeed">
 						<span>提现成功</span>
 					</li>
 				</ul>
@@ -66,11 +66,11 @@
 					<span>财务明细</span>
 				</div>
 				<ul class="for-left">
-					<li class="for-left-item for_finance_detail">
-						<span>充值明细</span>
+					<li class="for-left-item for_finance_detail" id="charge_detail">
+							<span>充值明细</span>
 					</li>
-					<li class="for-left-item for_finance_detail">
-						<span>派奖明细</span>
+					<li class="for-left-item for_finance_detail" id="sendprice_detail">
+							<span>派奖明细</span>
 					</li>
 				</ul>
 			</li>
@@ -80,7 +80,7 @@
 					<span>运营活动</span>
 				</div>
 				<ul class="for-left">
-					<li class="for-left-item for_oper_activity">
+					<li class="for-left-item for_oper_activity" id="platform_activity">
 						<span>平台活动</span>
 					</li>
 				</ul>
@@ -158,23 +158,4 @@
 			<span>意见反馈</span>
 		</div>-->
 	</div>
-<script type="text/javascript" src="/manage/static/compressed/jquery-3.2.1.min.js"></script>
-<script>
-	$(function () {
-		$('.cy_left>li').click(function (e) {
-            $(this).children('ul').show().parent().siblings().children('ul').hide()
-			$('.for-left-item').click(function () {
-				$(this).addClass('active-item').siblings().removeClass('active-item');
-            })
-        })
-		var leftHeight = document.documentElement.clientHeight-55
-		$('.left-wrapper').css('height', leftHeight )
-		$('.statisticas').click(function () {
-			$.get('http://localhost:8080/manage/statistics/', function (data) {
-				$(document.body).html(data)
-            })
-        })
-    })
-
-</script>
 {{end}}

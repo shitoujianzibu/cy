@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{template "header"}}
+    <style>
+        .cy_white {
+
+        }
+        .ticket-wrapper {
+            width: 100%;
+            font-family: AdobeHeitiStd Regular;
+            font-size: 14px;
+            color: #666;
+        }
+        /*订单详情*/
+        .user-detail-msg {
+            height: 40px;
+            padding-left: 34px;
+            line-height: 40px;
+            border-top-right-radius: 5px ;
+            border-top-left-radius: 5px;
+            background-color: rgba(240, 102, 102, 1);
+        }
+        .ticket-today{
+            box-sizing: border-box;
+
+        }
+        .ticket-today img{
+            margin-top: 30px;
+            width: 68px;
+            height: 61px;
+
+        }
+        /*进度条*/
+        .ticket-progress{
+            height: 200px;
+            padding-left: 127px;
+            overflow: hidden;
+        }
+        .ticket-progress div:first-child span{
+            margin-right: 23%;
+        }
+        .ticket-progress div:first-child span:last-child{
+            margin-right: 0;
+        }
+        .ticket-progress div:nth-child(3) span{
+            margin-right: 15%;
+        }
+        .ticket-progress div:nth-child(3) span:last-child{
+            margin-right: 0;
+        }
+        .ticket-progress .big{
+            margin: 20px 0;
+            position: relative;
+            width: 85%;
+            height: 10px;
+            background-color: #BFBFBF;
+            box-shadow: 0px 1px 2px #bfbfbf ;
+        }
+        .ticket-progress .big span{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #FF605E;
+            margin-top: -5px;
+            margin-left: -6px;
+        }
+        .ticket-progress .big ul li{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-top: -5px;
+            margin-left: -6px;
+            background-color: #BFBFBF;
+        }
+        .ticket-progress .big ul li:nth-child(1){
+            left: 33%;
+            background-color: #FF605E;
+        }
+        .ticket-progress .big ul li:nth-child(2){
+            left: 66%;
+        }
+        .ticket-progress .big ul li:nth-child(3){
+            left: 99%;
+        }
+        .ticket-progress .small {
+            width: 33%;
+            height: 100%;
+            background-color: #FF605E;
+        }
+        /*开奖号码*/
+        .ticket-number{
+            overflow: hidden;
+        }
+        .ticket-number span, .ticket-number ul {
+            float: left;
+        }
+        .ticket-number ul li{
+            float: left;
+            width: 30px;
+            height: 30px;
+            background-color: #f06666;
+            border-radius: 50%;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+        }
+        .ticket-number ul li:last-child{
+            width: 30px;
+            height: 30px;
+            background-color: #00A0E9;
+            border-radius: 50%;
+        }
+        /* 方案详情*/
+        .ticket-detail{
+            overflow: hidden;
+        }
+        .minitd > div{
+            overflow: hidden;
+            padding-left: 48px;
+            margin-right: -48px;
+        }
+        .minitd span, .minitd ul, .minitd ul li{
+            float: left;
+            margin-left: 3px;
+        }
+
+    </style>
+</head>
+<body style="min-width: 1600px;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
+            {{template "top" .}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
+            {{template "left" .}}
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
+            <div class="main_wrapper">
+                <div class="statistics" style="display:block;">{{template "statistics" .}}</div>
+                <div class="user_detail" style="display:none;">{{template "user_detail" .}}</div>
+                <div class="user_detail_msg" style="display:none;">{{template "user_detail_msg" .}}</div>
+                <div class="user_account_detail" style="display:none;">{{template "user_account_detail" .}}</div>
+                <div class="ticket_out" style="display:none;">{{template "ticket_out" .}}</div>
+                <div class="ticket_win" style="display:none;">{{template "ticket_win" .}}</div>
+                <div class="ticket_win_detail" style="display:none;">{{template "ticket_win_detail" .}}</div>
+                <div class="ticket_set" style="display:none;">{{template "ticket_set" .}}</div>
+                <div class="ticket_trace" style="display:none;">{{template "ticket_trace" .}}</div>
+                <div class="ticket_trace_detail" style="display:none;">{{template "ticket_trace_detail" .}}</div>
+                <div class="withdraw_check" style="display:none;">{{template "withdraw_check" .}}</div>
+                <div class="withdraw_succeed" style="display:none;">{{template "withdraw_succeed" .}}</div>
+                <div class="charge_detail" style="display:none;">{{template "charge_detail" .}}</div>
+                <div class="sendprice_detail" style="display:none;">{{template "sendprice_detail" .}}</div>
+                <div class="platform_activity" style="display:none;">{{template "platform_activity" .}}</div>
+                <div class="feedback" style="display:none;">{{template "feedback" .}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{{template "footer"}}
+
+<script type="text/javascript">
+    $(function () {
+        /********************左侧导航栏********************/
+        $('.cy_left>li').click(function (e) {
+            // 手风琴效果
+            $(this).children('ul').show().parent().siblings().children('ul').hide();
+            // 点击li 默认选中第一个子li
+            $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item')
+        });
+        $('.for-left-item').click(function (e) {
+            // 点击增加背景色
+            $(this).addClass('active-item').siblings().removeClass('active-item');
+            // 点击 li 移除其他组 li 的背景色
+            $(this).parent().parent().siblings().children('ul').children('li').removeClass('active-item');
+            var liId = $(this).attr('id');
+            $('.'+liId).show().siblings().hide();
+            e.stopPropagation()
+        });
+        $('#feedback').click(function () {
+            $('.feedback').show().siblings().hide()
+        });
+        var leftHeight = document.documentElement.clientHeight-55;
+        $('.left-wrapper').css('height', leftHeight );
+
+
+        /********************数据统计********************/
+        laydate.render({
+            elem: '.laydate1' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate2' //指定元素
+        });
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var bardata = {
+            labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
+            datasets : [{
+                label:"投注量",
+                backgroundColor : "rgba(220,220,220,0.5)",
+                borderColor : "rgba(220,220,220,1)",
+                data : [230000,600000,280000,400000,560000,900000,400000,80000]
+            }]
+        };
+        window.myBar = new Chart(ctx,{
+            type:'bar',
+            data:bardata,
+            option:{
+                elements:{
+                    rectangle: {
+                        borderWidth:2,
+                        barWidth: 10
+                    }
+                },
+                responsive:true,
+                legend:{
+                    position: 'right',
+                },
+                title:{
+                    display:true,
+                    text: 'chart.js h bar',
+                },
+                series: {
+                }
+            }
+        })
+        /********************用户信息********************/
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-1'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************用户详情信息********************/
+        var width = document.documentElement.clientWidth;
+        var height = document.documentElement.clientHeight;
+        $('.amend-usermsg-mask').css('width', width);
+        $('.amend-usermsg-mask').css('height', height);
+        $('.amend').click(function () {
+            $('.amend-usermsg-mask').fadeIn()
+        })
+        $('.cancel').click(function () {
+            $('.amend-usermsg-mask').fadeOut()
+        })
+        $(window).resize(function () {
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+            $('.amend-usermsg-mask').css('width', width);
+            $('.amend-usermsg-mask').css('height', height);
+        })
+
+
+        /********************用户个人详情********************/
+        laydate.render({
+            elem: '.laydate3' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate4' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-2'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+
+        /********************中奖派奖********************/
+        laydate.render({
+            elem: '.laydate3' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate4' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-2'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************彩种设置********************/
+        $('.ticket_set_wrapper .sell').click(function () {
+            if ($(this).hasClass('start')) {
+                $(this).removeClass('start').addClass('stop').html('停止销售')
+            } else {
+                $(this).removeClass('stop').addClass('start').html('开始销售')
+            }
+        });
+
+        /********************追号管理********************/
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-4'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+        /********************提现审核********************/
+        laydate.render({
+            elem: '.laydate7' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate8' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-5'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************提现成功********************/
+        laydate.render({
+            elem: '.laydate9' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate10' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-6'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************充值明细********************/
+        laydate.render({
+            elem: '.laydate11' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate12' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-7'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************派奖明细********************/
+        laydate.render({
+            elem: '.laydate13' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate14' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-8'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+
+        /********************平台活动********************/
+        laydate.render({
+            elem: '.laydate15' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate16' //指定元素
+        });
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#upload' //绑定元素
+                ,choose: function (obj) {
+                    console.log(obj);
+                }
+                ,url: '/manage/PlatformActivity/'//上传接口
+                ,done: function(res){
+                    //上传完毕回调
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+        var imgSrc = $('#upload').css('backgroundImage').slice(5, -2)
+        // $('.preview').attr('src', imgSrc)
+        console.log(imgSrc);
+
+        var width = document.documentElement.clientWidth;
+        var height = document.documentElement.clientHeight;
+        $('.add-activiity-wrapper').css('width', width);
+        $('.add-activiity-wrapper').css('height', height);
+        $('.banner_wrapper ul li:last-child').click(function () {
+            $('.add-activiity-wrapper').fadeIn()
+        });
+        $('.cancel').click(function () {
+            $('.add-activiity-wrapper').fadeOut()
+        });
+        $(window).resize(function () {
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+            $('.add-activiity-wrapper').css('width', width);
+            $('.add-activiity-wrapper').css('height', height);
+        })
+
+
+        /********************意见反馈********************/
+        laydate.render({
+            elem: '.laydate17' //指定元素
+        });
+        laydate.render({
+            elem: '.laydate18' //指定元素
+        });
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-9'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

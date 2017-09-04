@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {{template "header"}}
-</head>
-<body style="min-width: 1600px;">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-            {{template "top" .}}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
-            {{template "left" .}}
-        </div>
-        <div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
-            <div class="cy_main">
+{{define "user_account_detail"}}
+    <div class="cy_main">
                 <!-- 上部导航 -->
                 <div id="path" class="path">
                     {{range .Path}}
@@ -27,13 +11,13 @@
                     <form class="form-inline">
                         <div class="form-group" style="padding-left: 72px;">
                             <div class="input-group">
-                                <input class="date form-control datapicker laydate1" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
+                                <input class="date form-control datapicker laydate3" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
                             </div>
                         </div>
                         至
                         <div class="form-group" style="padding-left: 20px">
                             <div class="input-group">
-                                <input class="date form-control datapicker laydate2" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
+                                <input class="date form-control datapicker laydate4" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
                             </div>
                         </div>
                         <!-- 一个选择框 -->
@@ -113,36 +97,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="lay-page"></div>
+                <div id="lay-page-2" class="lay-page-default"></div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{template "footer"}}
-
-<script type="text/javascript">
-    $(function () {
-        laydate.render({
-            elem: '.laydate1' //指定元素
-        });
-        laydate.render({
-            elem: '.laydate2' //指定元素
-        });
-        layui.use('laypage', function(){
-            var laypage = layui.laypage;
-            //执行一个laypage实例
-            laypage.render({
-                elem: 'lay-page'
-                ,count: 99
-                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
-                ,jump: function(obj){
-                    console.log(obj)
-                }
-            });
-        });
-    })
+    <script type="text/javascript">
 </script>
-</body>
-</html>
+{{end}}

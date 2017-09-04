@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-{{template "header"}}
-</head>
-<body style="min-width: 1250px;">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12 col-lg-12 col-sm-12 no-padding">
-			{{template "top" .}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2 no-padding">
-			{{template "left" .}}
-		</div>
-		<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10 no-padding">
-			<div class="cy_main">
+{{define "statistics"}}
+	<div class="cy_main">
 				<!-- 上部导航 -->
 				<div id="path" class="path">
 					{{range .Path}}
@@ -25,6 +9,7 @@
 				<!-- 背景白框 -->
 				<div class="cy_radius cy_white">
 					<form class="form-inline">
+						<!--日期选择-->
 						<div class="form-group" style="padding-left: 60px;">
 							<div class="input-group">
 								<input class="date form-control datapicker laydate1" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
@@ -76,54 +61,4 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-
-{{template "footer"}}
-
-<script type="text/javascript">
-$(function () {
-    laydate.render({
-        elem: '.laydate1' //指定元素
-    });
-    laydate.render({
-        elem: '.laydate2' //指定元素
-    });
-	var ctx = $("#myChart").get(0).getContext("2d");
-    var bardata = {
-            labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
-            datasets : [{
-                label:"投注量",
-                backgroundColor : "rgba(220,220,220,0.5)",
-                borderColor : "rgba(220,220,220,1)",
-                data : [230000,600000,280000,400000,560000,900000,400000,80000]
-            }]
-        };
-        window.myBar = new Chart(ctx,{
-            type:'bar',
-            data:bardata,
-            option:{
-                elements:{
-                     rectangle: {
-                     	borderWidth:2,
-                         barWidth: 10
-                     }
-                },
-                 responsive:true,
-                 legend:{
-                 	position: 'right',
-                 },
-                 title:{
-                 	display:true,
-                 	text: 'chart.js h bar',
-                 },
-                series: {
-
-				}
-            }
-        })
-})
-</script>
-</body>
-</html>
+{{end}}
