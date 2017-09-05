@@ -1,0 +1,24 @@
+{{define "top"}}
+<!-- 顶部红框 -->
+	<div id="top" class="topboard">
+		<!-- 左侧文字  -->
+		<div class="cy_title cy_title_clr">
+			<!-- 左侧logo -->
+			<img src="/manage/static/img/icon.png" class="cy_title_img">
+			<!-- 名字 -->
+			<div class="cy_line">
+				<span class="text cy_blk">游彩后台管理</span>
+				<span class="text" style="font-size: 12px;">youcaiManagement</span>
+			</div>
+		</div>
+		<!-- 登录用户名, 退出style="padding-right: 12px;"-->
+		<div class="cy_title cy_line cy_right cy_exit" >
+			<!-- 左侧logo -->
+			<img src="{{.HeaderImg}}" class="cy_title_img">
+			<span class="cy_line cy_top text" style="padding-top: 12px;">{{.Name}}</span>
+			<!-- 退出logo -->
+			<img src="/manage/static/img/exit.png" class="cy_title_img">
+			<span class="cy_line cy_top text" style="padding-top: 12px; ">退出</span>
+		</div>
+	</div>
+{{end}}
