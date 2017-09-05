@@ -1,0 +1,153 @@
+{{define "platform_activity"}}
+    <style>
+        .banner_wrapper{
+            margin: 20px 0 77px 0;
+            overflow: hidden;
+        }
+        .banner_wrapper ul li:last-child {
+            cursor: pointer;
+        }
+        .banner_wrapper li {
+            float: left;
+            margin-right: 30px;
+            text-align: center;
+        }
+        .banner_wrapper span {
+            display: inline-block;
+            margin-top: 6px;
+        }
+        .banner {
+            width: 220px;
+            height: 110px;
+            background-color: #eee;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+        }
+        .banner_wrapper li:last-child div {
+            background-image: url('/manage/static/img/addActive.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+        .add-activiity-wrapper{
+            background-color: rgba(0, 0, 0, .3);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .add-activiity-wrapper .shadow {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 468px;
+            height: 353px;
+            background-color: #abaaaa;
+        }
+        .add-activiity-wrapper .shadow .box {
+            width: 458px;
+            height: 343px;
+            margin: 5px 0 0 5px ;
+        }
+        .add-activiity-wrapper .shadow .box input {
+            border-radius: 3px;
+            border: 1px solid #b1b1b1;
+        }
+        .add-activiity-wrapper .shadow .box .butn button,.add-activiity-wrapper .shadow .box .butn div{
+            width: 100px ;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            border-radius: 4px;
+            border: 0 solid #fff;
+        }
+    </style>
+    <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+                    {{range .Path}}
+                    <span>{{.}}</span>
+                    {{end}}
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white" style="padding: 25px 0 0 60px; font-weight: bold;color: #666">
+                    <!--banner 活动页面-->
+                    <p>Banner 活动页面</p>
+                    <div class="banner_wrapper">
+                       <ul>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner"></div>
+                               <span>点击次数：0</span>
+                           </li>
+                           <li>
+                               <div class="banner">
+                               </div>
+                               <span>点击次数：0</span>
+                           </li>
+                       </ul>
+                    </div>
+                    <!--快捷投注彩种-->
+                    <div>
+                        <form action="" class="form-inline" style="padding-top: 0">
+                            <div class="form-group">
+                                <label for="ticket_type">首页快捷投注彩种</label>
+                                <select name="ticket_type" id="ticket_type" class="form-control" style="background-color:#dcdcdc;margin-left: 10px">
+                                    <option value="double_color">双色球</option>
+                                    <option value="fucai3d">福彩3d</option>
+                                    <option value="seven_happy">七乐彩</option>
+                                    <option value="daletou">大乐透</option>
+                                    <option value="seven_star">七星彩</option>
+                                    <option value="pailie_three">排列三</option>
+                                    <option value="pailie_five">排列五</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="add-activiity-wrapper" style="display: none">
+                        <div class="shadow">
+                            <div class="box">
+                                <p style="height: 30px;background-color:#eee;line-height: 30px;padding-left: 10px">添加活动图</p>
+                                <div style="height: 313px;background-color:#fefefe;">
+                                    <form action="" style="padding-top: 30px">
+                                        <label for="active-name" style="margin: 0 10px 0 98px">活动名称</label>
+                                        <input id="active-name" type="text" style="height: 33px;width: 105px;">
+                                        <div style="vertical-align: top;margin: 20px 0 20px 98px">
+                                            <span style="line-height: 14px;vertical-align: top;margin-right: 10px">活动图片</span>
+                                            <button type="button" id="upload" style="height: 75px;width: 143px;outline: none;border-radius :3px;border: 1px solid #b1b1b1;background-color:#eee;
+                                            background-image: url('/manage/static/img/addActive.png');background-repeat: no-repeat;background-position: center"></button>
+                                            <img class="preview" src="" alt="">
+                                        </div>
+                                        <div style="margin-left: 98px">
+                                            <span style="margin-right: 10px">展示日期</span>
+                                            <input class="date  datapicker laydate15" type="text" name="start" style="background-color: #fff;height: 33px;
+                                             background-position: 82px 6px;width: 110px;border-radius: 5px" value="">
+                                            至
+                                            <input class="date  datapicker laydate16" type="text" name="end"  style="background-color: #fff;;height: 33px;
+                                             background-position: 82px 6px;width: 110px;border-radius: 5px" value="">
+                                        </div>
+                                        <div class="butn" style="margin-top: 40px;padding-left: 80px">
+                                            <button type="submit" style="background-color:#88ABDA;">确定</button>
+                                            <div class="cancel"style="background-color:#fb4949;cursor: pointer;
+                                            margin-left: 80px;display: inline-block">取消</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{{end}}

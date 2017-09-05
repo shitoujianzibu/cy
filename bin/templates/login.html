@@ -2,44 +2,60 @@
 <html>
 <head>
 {{template "header"}}
+	<style>
+		html, body{
+			width: 100%;
+			height: 100%;
+		}
+		.user, .password{
+			width: 231px;
+			margin: 43px 0 0 81px;
+			padding-left: 45px;
+		}
+		.user {
+			background: url('/manage/static/img/user.png') no-repeat 9px 7px;
+			background-size:18px 18px ;
+		}
+		.password {
+			background: url('/manage/static/img/lock.png') no-repeat 9px 7px;
+			background-size:18px 18px ;
+		}
+	</style>
 </head>
 <body>
-<div id ="cy_bk_login" class="container-fruid " style="padding-top: 200px">
-	<div style="width: 414px; height: 317px;margin-left: auto;margin-right: auto;background-color: rgba(253, 254, 254, .5);border-radius: 8px; padding-top: 8px;">
-		<div style="width: 397px; height: 300px;margin-left: auto;margin-right: auto; background-color: rgba(253, 254, 254, 1);border-radius: 8px;">
-		<!--  题目 -->
-		<div style="height: 42px; padding: 8px 0px 0px 135px;background-color: #eeeeee;border-radius: 8px 8px 0px 0px;font-family: MyriadPro Regular;font-weight: bold;font-size: 15px; color: #666666;">彩游后台管理系统</div>
-		<form method="post">
-			<div class="form-group">
-				<input type="text" name="mobile" placeholder="用户名" class="form-control" style="width: 231px;margin:43px 0px 0px 81px;"></input>
-			</div>
-			<div class="form-group">
-				<input type="password" name="pwd" placeholder="密码" class="form-control" style="width: 231px;margin:14px 0px 0px 81px;"></input>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn" style="width: 239px;height: 44px;margin-left: 78px; margin-top: 43px;background-color: #eb6060 ">登录</button>
-			</div>
-		</form>
+<div class="login_wrapper">
+	<div id ="cy_bk_login" class="container-fruid ">
+		<div style="width: 414px; height: 317px;margin-left: auto;margin-right: auto;background-color: rgba(253, 254, 254, .5);border-radius: 8px; padding-top: 8px;">
+			<div style="width: 397px; height: 300px;margin-left: auto;margin-right: auto; background-color: rgba(253, 254, 254, 1);border-radius: 8px;">
+				<!--  题目 -->
+				<div style="height: 42px; padding: 8px 0px 0px 135px;background-color: #eeeeee;border-radius: 8px 8px 0px 0px;font-family: MyriadPro Regular;font-weight: bold;font-size: 15px; color: #666666;">游彩后台管理系统</div>
+				<form method="post">
+					<div class="form-group">
+						<input type="text" name="mobile" placeholder="用户名" class="form-control user"></input>
+					</div>
+					<div class="form-group">
+						<input type="password" name="pwd" placeholder="密码" class="form-control password" style="width: 231px;margin:14px 0px 0px 81px;"></input>
+					</div>
+					<div style="overflow: hidden;padding: 0 85px">
+						<input type="checkbox" style="width: 14px;height: 14px;vertical-align:text-bottom;line-height: 16px">
+						<span style="padding-top: -2px;display: inline-block">记住密码</span>
+						<a href="" style="font-family: 'AdobeHeitiStd Regular';font-size: 13px;color: #00a0e9;line-height: 16px;float: right;font-weight: bold">忘记密码?</a>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn" style="width: 239px;height: 44px;margin:28px 0 0 78px;background-color: #eb6060;color: #fff">
+							登 <span style="display: inline-block;width: 40px"></span>录
+						</button>
+					</div>
+				</form>
 
-	</div>
+			</div>
+		</div>
 	</div>
 </div>
+
 {{template "footer"}}
 <script type="text/javascript">
-		$(function () {
-			var winWidth = 800
-			var winHeight = 600
-			// 获取窗口宽度
-			if (window.innerWidth){
-				winWidth = window.innerWidth;
-				winHeight = window.innerHeight;
-			}
-			else if ((document.body) && (document.body.clientWidth)){
-				winWidth = document.body.clientWidth;
-				winHeight = document.body.clientHeight;
-			}
-			$("#cy_bk_login").css("height", winHeight);
-		})
+
 </script>
 </body>
 </html>

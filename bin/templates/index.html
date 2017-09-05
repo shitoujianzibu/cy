@@ -173,8 +173,12 @@
         $('.cy_left>li').click(function (e) {
             // 手风琴效果
             $(this).children('ul').show().parent().siblings().children('ul').hide();
+
             // 点击li 默认选中第一个子li
             $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item')
+            // 点击父li跳转到默认第一个li
+            var classN = $(this).attr('class').slice(4)
+            $('.'+classN).show().siblings().hide();
         });
         $('.for-left-item').click(function (e) {
             // 点击增加背景色
@@ -184,9 +188,6 @@
             var liId = $(this).attr('id');
             $('.'+liId).show().siblings().hide();
             e.stopPropagation()
-        });
-        $('#feedback').click(function () {
-            $('.feedback').show().siblings().hide()
         });
         var leftHeight = document.documentElement.clientHeight-55;
         $('.left-wrapper').css('height', leftHeight );
@@ -199,6 +200,7 @@
         laydate.render({
             elem: '.laydate2' //指定元素
         });
+        // var myChart = echarts.init(document.getElementById('#myChart'));
         var ctx = $("#myChart").get(0).getContext("2d");
         var bardata = {
             labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
@@ -216,7 +218,7 @@
                 elements:{
                     rectangle: {
                         borderWidth:2,
-                        barWidth: 10
+                        barWidth: 6
                     }
                 },
                 responsive:true,
@@ -226,8 +228,6 @@
                 title:{
                     display:true,
                     text: 'chart.js h bar',
-                },
-                series: {
                 }
             }
         })
@@ -243,6 +243,9 @@
                     console.log(obj)
                 }
             });
+        });
+        $('#user_detail_mini > tr > td:last-child').click(function () {
+            $('.user_detail_msg').show().siblings().hide();
         });
 
         /********************用户详情信息********************/
@@ -304,6 +307,13 @@
                 }
             });
         });
+        $('#ticket_win_mini > tr > td :last-child').click(function () {
+            $('.ticket_win_detail').show().siblings().hide();
+        });
+        /********************中奖派奖详情********************/
+        $('.ticwindet-btn').click(function () {
+            $('.ticket_win').show().siblings().hide();
+        });
 
         /********************彩种设置********************/
         $('.ticket_set_wrapper .sell').click(function () {
@@ -326,6 +336,13 @@
                     console.log(obj)
                 }
             });
+        });
+        $('#ticket_trace_mini  > tr > td:last-child').click(function () {
+            $('.ticket_trace_detail').show().siblings().hide();
+        });
+        /********************追号管理详情********************/
+        $('.tictradet-btn').click(function () {
+            $('.ticket_trace').show().siblings().hide();
         });
         /********************提现审核********************/
         laydate.render({
@@ -436,8 +453,8 @@
         // $('.preview').attr('src', imgSrc)
         console.log(imgSrc);
 
-        var width = document.documentElement.clientWidth;
-        var height = document.documentElement.clientHeight;
+        //var width = document.documentElement.clientWidth;
+        //var height = document.documentElement.clientHeight;
         $('.add-activiity-wrapper').css('width', width);
         $('.add-activiity-wrapper').css('height', height);
         $('.banner_wrapper ul li:last-child').click(function () {

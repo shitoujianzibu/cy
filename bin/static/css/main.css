@@ -17,7 +17,9 @@ body{
 .cy_radius {
 	border-radius: 5px
 }
-
+.main_wrapper > div{
+	overflow: hidden;
+}
 .cy_main {
 	width: 90%;
 	height: 100%;
@@ -124,12 +126,24 @@ body{
 	border-color: #b3b3b3 !important;
 }
 
-
-#cy_bk_login {
+.login_wrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
     background: -webkit-radial-gradient(#91a5b0, #698088, #435c61); /* Safari 5.1 - 6.0 */
     background: -o-radial-gradient(#91a5b0, #698088, #435c61); /* Opera 11.6 - 12.0 */
     background: -moz-radial-gradient(#91a5b0, #698088, #435c61); /* Firefox 3.6 - 15 */
     background: radial-gradient(#91a5b0, #698088, #435c61); /* 标准的语法（必须放在最后） */
+}
+#cy_bk_login{
+	width: 414px;
+	h317
+	position: absolute;
+	margin: auto;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	top: 0;
 }
 
 /*  bootstrap

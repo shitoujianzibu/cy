@@ -1,0 +1,107 @@
+{{define "ticket_trace"}}
+    <style>
+        .jinxingzhong{
+            color: red;
+        }
+        .yijieshu{
+            color: #64913A;
+        }
+    </style>
+    <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+                    {{range .Path}}
+                    <span>{{.}}</span>
+                    {{end}}
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white">
+                    <form action="" class="form-inline" style="color: #666">
+                        <div class="form-group">
+                            <label style="margin:0 10px 0 80px;font-weight: bold">选择彩票类型</label>
+                            <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#dcdcdc;">
+                                <option value="all">全部</option>
+                                <option value="goucai">购彩</option>
+                                <option value="chongzhi">充值</option>
+                                <option value="paijiang">派奖</option>
+                                <option value="tikuan">提款</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-left: 50px">
+                            <input type="number" value="" class="form-control" style="width:100px;">
+                        </div>
+                        <div class="form-group">
+                            <label style="margin:0 10px 0 60px;font-weight: bold">订单状态</label>
+                            <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#dcdcdc;">
+                                <option value="all">全部</option>
+                                <option value="daikaijiang">待开奖</option>
+                                <option value="yizhongjiang">已中奖</option>
+                                <option value="shibai">出票失败</option>
+                                <option value="yituikuan">已退款</option>
+                                <option value="weizhongjiang">未中奖</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn search-btn" style="margin-left: 35%">查询</button>
+                    </form>
+                    <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
+                        <thead>
+                            <tr>
+                                <th>账号</th>
+                                <th>追期彩种</th>
+                                <th>购买期次</th>
+                                <th>xxxx</th>
+                                <th>追号条件</th>
+                                <th>已中奖</th>
+                                <th>投注时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="ticket_trace_mini">
+                            <!-- <tr>
+                               <td>{{.Tel}}</td>
+                               <td>{{.ID}}</td>
+                               <td>{{.Channel}}</td>
+                               <td>{{.Value}}</td>
+                               <td>{{.Data}}</td>
+                               <td>{{.Status}}</td>
+                             </tr>-->
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>双色球</td>
+                                <td>201702</td>
+                                <td><span>中奖后继续追号</span></td>
+                                <td>599</td>
+                                <td>688</td>
+                                <td><span class="jinxingzhong yijieshu">已结束</span></td>
+                                <td style="cursor: pointer;"><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>双色球</td>
+                                <td>201702</td>
+                                <td><span>中奖后继续追号</span></td>
+                                <td>599</td>
+                                <td>688</td>
+                                <td><span class="jinxingzhong yijieshu">已结束</span></td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                            <tr>
+                                <td>wx1234</td>
+                                <td>12312312432432</td>
+                                <td>双色球</td>
+                                <td>201702</td>
+                                <td><span>中奖后继续追号</span></td>
+                                <td>599</td>
+                                <td>688</td>
+                                <td><span class="jinxingzhong">已结束</span></td>
+                                <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="lay-page-4" class="lay-page-default"></div>
+            </div>
+{{end}}

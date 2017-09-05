@@ -1,0 +1,104 @@
+{{define "user_account_detail"}}
+    <div class="cy_main">
+                <!-- 上部导航 -->
+                <div id="path" class="path">
+                    {{range .Path}}
+                    <span>{{.}}</span>
+                    {{end}}
+                </div>
+                <!-- 背景白框 -->
+                <div class="cy_radius cy_white">
+                    <form class="form-inline">
+                        <div class="form-group" style="padding-left: 72px;">
+                            <div class="input-group">
+                                <input class="date form-control datapicker laydate3" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
+                            </div>
+                        </div>
+                        至
+                        <div class="form-group" style="padding-left: 20px">
+                            <div class="input-group">
+                                <input class="date form-control datapicker laydate4" type="text" name="end"  style="background-color: #fff;border-radius: 5px" value="">
+                            </div>
+                        </div>
+                        <!-- 一个选择框 -->
+                        <div class="form-group"  style="margin-left: 50px" >
+                            <label>明细类型</label>
+                                <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
+                                    <option value="all">全部</option>
+                                    <option value="double_color">双色球</option>
+                                    <option value="fucai3d">福彩3d</option>
+                                    <option value="seven_happy">七乐彩</option>
+                                    <option value="shishicai">时时彩</option>
+                                    <option value="kuaisan">快3</option>
+                                </select>
+                        </div>
+                        <div class="form-group" style="margin: 0 6px 0 182px">
+                            <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
+                        </div>
+                        <button type="submit" class="btn  search-btn" >搜索</button>
+                    </form>
+                    <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
+                        <thead>
+                        <tr>
+                            <th>账户名称</th>
+                            <th>手机号</th>
+                            <th>账户余额</th>
+                            <th>账户收益</th>
+                            <th>注册时间</th>
+                            <th>身份信息</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="mini">
+                        <!-- <tr>
+                           <td>{{.Tel}}</td>
+                           <td>{{.ID}}</td>
+                           <td>{{.Channel}}</td>
+                           <td>{{.Value}}</td>
+                           <td>{{.Data}}</td>
+                           <td>{{.Status}}</td>
+                         </tr>-->
+                        <tr>
+                            <td>wx1234</td>
+                            <td>12312312432432</td>
+                            <td>25</td>
+                            <td>500</td>
+                            <td>17-4-3</td>
+                            <td>已完善</td>
+                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                        </tr>
+                        <tr>
+                            <td>wx1234</td>
+                            <td>12312312432432</td>
+                            <td>25</td>
+                            <td>500</td>
+                            <td>17-4-3</td>
+                            <td>已完善</td>
+                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                        </tr>
+                        <tr>
+                            <td>wx1234</td>
+                            <td>12312312432432</td>
+                            <td>25</td>
+                            <td>500</td>
+                            <td>17-4-3</td>
+                            <td>已完善</td>
+                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                        </tr>
+                        <tr>
+                            <td>wx1234</td>
+                            <td>12312312432432</td>
+                            <td>25</td>
+                            <td>500</td>
+                            <td>17-4-3</td>
+                            <td>已完善</td>
+                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="lay-page-2" class="lay-page-default"></div>
+                </div>
+    <script type="text/javascript">
+</script>
+{{end}}
