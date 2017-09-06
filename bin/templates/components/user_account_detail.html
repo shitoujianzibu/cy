@@ -1,4 +1,20 @@
 {{define "user_account_detail"}}
+<style>
+    .user_acc_res2{
+        margin: 0 6px 0 182px;
+    }
+    .user_acc_res1{
+        padding-left: 72px;
+    }
+    @media (max-width: 1565px) {
+        .user_acc_res2{
+            margin: 0 6px 0 20px;
+        }
+        .user_acc_res1{
+            padding-left: 50px;
+        }
+    }
+</style>
     <div class="cy_main">
                 <!-- 上部导航 -->
                 <div id="path" class="path">
@@ -9,7 +25,7 @@
                 <!-- 背景白框 -->
                 <div class="cy_radius cy_white">
                     <form class="form-inline">
-                        <div class="form-group" style="padding-left: 72px;">
+                        <div class="form-group user_acc_res1">
                             <div class="input-group">
                                 <input class="date form-control datapicker laydate3" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
                             </div>
@@ -21,7 +37,7 @@
                             </div>
                         </div>
                         <!-- 一个选择框 -->
-                        <div class="form-group"  style="margin-left: 50px" >
+                        <div class="form-group"  style="margin-left: 20px" >
                             <label>明细类型</label>
                                 <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
                                     <option value="all">全部</option>
@@ -32,7 +48,7 @@
                                     <option value="kuaisan">快3</option>
                                 </select>
                         </div>
-                        <div class="form-group" style="margin: 0 6px 0 182px">
+                        <div class="form-group user_acc_res2">
                             <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
                         </div>
                         <button type="submit" class="btn  search-btn" >搜索</button>

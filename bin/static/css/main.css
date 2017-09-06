@@ -137,7 +137,7 @@ body{
 }
 #cy_bk_login{
 	width: 414px;
-	h317
+	height: 317px;
 	position: absolute;
 	margin: auto;
 	left: 0;
@@ -155,12 +155,12 @@ th {
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
 	vertical-align: middle;
 }
-.col-lg-2 {
+/*.col-lg-2 {
 	width: 11%;
 }
 .col-lg-10 {
 	width: 89%;
-}
+}*/
 
 /*底部返回按钮样式*/
 .back-btn {

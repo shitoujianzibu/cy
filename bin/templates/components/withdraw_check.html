@@ -9,6 +9,26 @@
         .shibai {
             color: #FBB45C;
         }
+        .check_res1{
+            padding-left: 72px;
+        }
+        .check_res2{
+            margin: 0 6px 0 182px;
+        }
+        .check_res3{
+            margin-left: 50px ;
+        }
+        @media (max-width: 1650px) {
+            .check_res1{
+                padding-left: 30px;
+            }
+            .check_res2{
+                margin: 0 6px 0 10px;
+            }
+            .check_res3{
+                margin-left: 10px ;
+            }
+        }
     </style>
     <div class="cy_main">
                 <!-- 上部导航 -->
@@ -20,7 +40,7 @@
                 <!-- 背景白框 -->
                 <div class="cy_radius cy_white">
                     <form class="form-inline" method="">
-                        <div class="form-group" style="padding-left: 72px;">
+                        <div class="form-group check_res1">
                             <div class="input-group">
                                 <input class="date form-control datapicker laydate7" type="text" name="start" style="background-color: #fff;border-radius: 5px" value="">
                             </div>
@@ -32,7 +52,7 @@
                             </div>
                         </div>
                         <!-- 一个选择框 -->
-                        <div class="form-group"  style="margin-left: 50px" >
+                        <div class="form-group check_res3"  >
                             <label>提现状态</label>
                             <select class="form-control" id="test" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
                                 <option value="all">全部</option>
@@ -42,7 +62,7 @@
                                 <option value="tixiancg">提现成功</option>
                             </select>
                         </div>
-                        <div class="form-group" style="margin: 0 6px 0 182px">
+                        <div class="form-group check_res2">
                             <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
                         </div>
                         <button type="submit" class="btn  search-btn" >搜索</button>
