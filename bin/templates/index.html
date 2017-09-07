@@ -194,13 +194,90 @@
 
 
         /********************数据统计********************/
+
         laydate.render({
             elem: '.laydate1' //指定元素
         });
         laydate.render({
             elem: '.laydate2' //指定元素
         });
-        // var myChart = echarts.init(document.getElementById('#myChart'));
+
+       /* var end;
+        var start = {
+            elem: '.laydate1',
+            done: function (dataS) {
+                end = {
+                    elem: '.laydate2',
+                    min: dataS,
+                };
+                laydate.render(end)
+            }
+        };
+        laydate.render(end)
+        laydate.render(start);*/
+
+       // 查询日期种类
+        function query(start, end, type) {
+            // 起始日期 和 结束日期
+            var stratDate = $('.' + start).val();
+            var endData = $('.' + end).val();
+            // 彩票类型
+            var checktype = $('.' + type).children('option:selected').val();
+
+            if (!stratDate || !endData) {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('请选择日期');
+                });
+            } else if (parseInt(stratDate.split('-').join('')) > parseInt(endData.split('-').join(''))) {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('起始日期不能大于结束日期');
+                });
+            } else {
+                return {
+                    stratDate: stratDate,
+                    endData: endData,
+                    checktype: checktype
+                }
+            }
+        }
+        $('.statistic_btn').click(function () {
+            var result = query('laydate1', 'laydate2', 'sta_tickettype');
+            if (result) {
+                // 发请求
+                console.log(result.endData);
+                $.get('/manage/static/data/data.json', function (data, status) {
+                    console.log(data, status);
+                })
+            }
+        });
+
+       /* $('.statistic_btn').click(function () {
+            // 起始日期 和 结束日期
+            var stratDate = $('.laydate1').val();
+            var endData = $('.laydate2').val();
+            // 彩票类型
+            var type = $('.sta_tickettype').children('option:selected').val();
+
+            if (!stratDate || !endData) {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('请选择日期');
+                });
+            } else if (parseInt(stratDate.split('-').join('')) > parseInt(endData.split('-').join(''))) {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('起始日期不能大于结束日期');
+                });
+            } else {
+                // 发请求
+                console.log(stratDate);
+                console.log($('.laydate2').val());
+                console.log(type);
+            }
+        });*/
+
         var ctx = $("#myChart").get(0).getContext("2d");
         var bardata = {
             labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
@@ -240,7 +317,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+                    // console.log(obj)
                 }
             });
         });
@@ -290,23 +367,46 @@
 
         /********************中奖派奖********************/
         laydate.render({
-            elem: '.laydate3' //指定元素
+            elem: '.laydate5' //指定元素
         });
         laydate.render({
-            elem: '.laydate4' //指定元素
+            elem: '.laydate6' //指定元素
         });
         layui.use('laypage', function(){
             var laypage = layui.laypage;
             //执行一个laypage实例
             laypage.render({
-                elem: 'lay-page-2'
-                ,count: 99
+                elem: 'lay-page-3'
+                ,count: ''
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
                     console.log(obj)
                 }
             });
         });
+        $('.ticketwin_btn').click(function () {
+            var result = query('laydate5', 'laydate6', 'ticwin_type');
+            if (result) {
+                // 发请求
+                console.log(result.endData);
+                $.get('/manage/static/data/data.json', function (data) {
+                    console.log(data);
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'lay-page-3'
+                            ,count: data.name.length
+                            ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                            ,jump: function(obj){
+                                console.log(obj)
+                            }
+                        });
+                    });
+                })
+            }
+        });
+
         $('#ticket_win_mini > tr > td :last-child').click(function () {
             $('.ticket_win_detail').show().siblings().hide();
         });
@@ -334,6 +434,7 @@
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
                     console.log(obj)
+
                 }
             });
         });
