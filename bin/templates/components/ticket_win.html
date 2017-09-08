@@ -19,9 +19,8 @@
     <div class="cy_main">
         <!-- 上部导航 -->
         <div id="path" class="path">
-            {{range .Path}}
-            <span>{{.}}</span>
-            {{end}}
+            <span class="firstLevel"></span>
+            <span class="secondLevel"></span>
         </div>
         <!-- 背景白框 -->
         <div class="cy_radius cy_white">
@@ -50,7 +49,7 @@
                     </select>
                 </div>
                 <div class="form-group tic_res2">
-                    <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
+                    <input type="text" class="form-control ticwin_phone" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
                 </div>
                 <button type="button" class="btn  search-btn ticketwin_btn" >搜索</button>
             </form>

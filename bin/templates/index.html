@@ -169,11 +169,27 @@
 
 <script type="text/javascript">
     $(function () {
+        /********************退出********************/
+        $('.login_out').click(function () {
+            layer.confirm('确定退出吗', {
+                area: ['300px', '200px'],
+                btn: ['确定', '取消'],
+                btn1: function () {
+                    window.location = 'http://localhost:8080/manage/login/'
+                },
+                btn2: function () {
+                }
+            })
+        });
         /********************左侧导航栏********************/
         $('.cy_left>li').click(function (e) {
             // 手风琴效果
             $(this).children('ul').show().parent().siblings().children('ul').hide();
 
+            // path 一级路径
+            var firstLevel = $(this).children('div').children('span').text();
+            $('.firstLevel').html(firstLevel);
+            $('.secondLevel').html(' > ' + $(this).children('ul').children('li').children('span:first').text());
             // 点击li 默认选中第一个子li
             $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item')
             // 点击父li跳转到默认第一个li
@@ -181,6 +197,9 @@
             $('.'+classN).show().siblings().hide();
         });
         $('.for-left-item').click(function (e) {
+            // path 二级路径
+            var secondLevel =$(this).children('span').text();
+            $('.secondLevel').html(' > ' + secondLevel);
             // 点击增加背景色
             $(this).addClass('active-item').siblings().removeClass('active-item');
             // 点击 li 移除其他组 li 的背景色
@@ -192,6 +211,7 @@
         var leftHeight = document.documentElement.clientHeight-55;
         $('.left-wrapper').css('height', leftHeight );
 
+        /******************** path路径 ********************/
 
         /********************数据统计********************/
 
@@ -217,13 +237,20 @@
         laydate.render(start);*/
 
        // 查询日期种类
-        function query(start, end, type) {
+        /*
+        * start: 开始日期 input 的class名
+        * end: 结束日期 input 的class名
+        * type: 查询种类 select 的class名
+        * phone: 查询手机号 input 的class名
+        * */
+
+        function query(start, end, type, phone) {
             // 起始日期 和 结束日期
             var stratDate = $('.' + start).val();
             var endData = $('.' + end).val();
             // 彩票类型
             var checktype = $('.' + type).children('option:selected').val();
-
+            var phoneNumber = phone ? $('.' + phone).val() : '';
             if (!stratDate || !endData) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
@@ -238,7 +265,8 @@
                 return {
                     stratDate: stratDate,
                     endData: endData,
-                    checktype: checktype
+                    checktype: checktype,
+                    phoneNumber: phoneNumber
                 }
             }
         }
@@ -246,7 +274,7 @@
             var result = query('laydate1', 'laydate2', 'sta_tickettype');
             if (result) {
                 // 发请求
-                console.log(result.endData);
+                console.log(result);
                 $.get('/manage/static/data/data.json', function (data, status) {
                     console.log(data, status);
                 })
@@ -278,7 +306,89 @@
             }
         });*/
 
-        var ctx = $("#myChart").get(0).getContext("2d");
+        var myChart = echarts.init(document.getElementById('myChart'));
+        // 指定图表的配置项和数据
+        var option = {
+            color: [''],
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+                data:['']
+            },
+            axis:{
+                axisTick: {
+                    show: false
+                },
+                axisLine:{
+                    color: '#48b',
+                    width: 2,
+                    type: 'solid'
+                }
+            },
+            series: [
+                {
+                    name:'销量',
+                    type:'bar',
+                    itemStyle: {
+                        normal:{
+                            color: function(params) {
+                                // build a color map as your need.
+                                var colorList = [
+                                    '#b7b8b8','#dedfdf',
+                                ];
+                                return colorList[params.dataIndex % 2]
+                            },
+                            label: {
+                                show: true,
+                                textStyle: {
+                                    color: '#a6a6a6'
+                                },
+                                position: 'top'
+                            }
+                        }
+                    },
+                    barWidth: '70%',
+                    data:[10, 52, 200, 334, 390, 330, 220, 240]
+                }
+            ],
+            xAxis: [
+                {
+                    axisLine:{
+                        show: true,
+                        lineStyle: {
+                            color: '#848484',
+                            type: 'solid',
+                            width: 3,
+                            shadowOffsetY: 0,
+                            shadowBlur: 0
+                        }
+                    },
+                    axisTick: {
+                        show:false
+                    },
+                    data: ["双色球","福彩3d","七乐彩","时时彩","快三","七星彩", "排列三", "排列五"]
+                }
+            ],
+            yAxis: {
+                axisLine:{
+                    show: true,
+                    lineStyle: {
+                        color: '#848484',
+                        type: 'solid',
+                        width: 4,
+                        shadowOffsetY: 0
+                    }
+                },
+                axisTick: {
+                    show:false,
+                }
+            }
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        /*var ctx = $("#myChart").get(0).getContext("2d");
         var bardata = {
             labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
             datasets : [{
@@ -307,7 +417,7 @@
                     text: 'chart.js h bar',
                 }
             }
-        })
+        });*/
         /********************用户信息********************/
         layui.use('laypage', function(){
             var laypage = layui.laypage;
@@ -317,7 +427,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    // console.log(obj)
+                    //
                 }
             });
         });
@@ -359,7 +469,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });
@@ -380,15 +490,14 @@
                 ,count: ''
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
                 }
             });
         });
         $('.ticketwin_btn').click(function () {
-            var result = query('laydate5', 'laydate6', 'ticwin_type');
+            var result = query('laydate5', 'laydate6', 'ticwin_type', 'ticwin_phone');
             if (result) {
                 // 发请求
-                console.log(result.endData);
+                console.log(result);
                 $.get('/manage/static/data/data.json', function (data) {
                     console.log(data);
                     layui.use('laypage', function(){
@@ -399,7 +508,6 @@
                             ,count: data.name.length
                             ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                             ,jump: function(obj){
-                                console.log(obj)
                             }
                         });
                     });
@@ -433,7 +541,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
 
                 }
             });
@@ -460,7 +568,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });
@@ -480,7 +588,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });
@@ -500,7 +608,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });
@@ -520,7 +628,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });
@@ -539,7 +647,7 @@
             var uploadInst = upload.render({
                 elem: '#upload' //绑定元素
                 ,choose: function (obj) {
-                    console.log(obj);
+                    ;
                 }
                 ,url: '/manage/PlatformActivity/'//上传接口
                 ,done: function(res){
@@ -587,7 +695,7 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-                    console.log(obj)
+
                 }
             });
         });

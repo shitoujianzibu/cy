@@ -2,9 +2,10 @@
 	<div class="cy_main">
 				<!-- 上部导航 -->
 				<div id="path" class="path">
-					{{range .Path}}
-					<span>{{.}}</span>
-					{{end}}
+
+					<span class="firstLevel">平台数据</span>
+					<span class="secondLevel"> &gt; 数据统计</span>
+
 				</div>
 				<!-- 背景白框 -->
 				<div class="cy_radius cy_white">
@@ -58,8 +59,9 @@
 					</div>
 
 					<!-- 一个图表 -->
-					<div class="myChart-wrapper" style="margin-top: 20px">
-						<canvas id="myChart" width="300" height="100"></canvas>
+					<div class="myChart-wrapper" style="margin-top: 20px;width: 1000px">
+						<!--<canvas id="myChart" width="300" height="100"></canvas>-->
+						<div id="myChart" style="width: 100%;height: 500px"></div>
 					</div>
 				</div>
 			</div>

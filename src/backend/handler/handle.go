@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	iris "gopkg.in/kataras/iris.v6"
+	"time"
 	
 )
 
@@ -37,13 +38,15 @@ func LoginP(ctx *iris.Context) {
 
 	if l.Pwd != "12345" {
 		// ctx.JSON(iris.StatusOK, common.ResData(false, "密码错误", "", "", nil))
-		ctx.WriteString("手机或密码错误")
+		// ctx.WriteString("手机或密码错误")
+		ctx.Redirect("/manage/login/")
+		time.Sleep(time.Second)
 		return
 	}
 	sess := ctx.Session()
 	sess.Set(auth, true)
 	sess.Set("name", "555")
-	ctx.Redirect("/manage/statistics/")
+	ctx.Redirect("/manage/index/")
 }
 
 // Logout ...
