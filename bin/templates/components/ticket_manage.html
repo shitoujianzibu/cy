@@ -1,0 +1,228 @@
+{{define "ticket_manage"}}
+    <style>
+        .tic_res2{
+            margin: 0 6px 0 250px;
+        }
+        @media (max-width: 1620px) {
+
+            .tic_res2 {
+                margin: 0 6px 0 10px;
+            }
+        }
+        #ticket_manage_mini > tr > td:last-child>div{
+            float: left;
+            margin-left: 5%;
+        }
+        #ticket_manage_mini > tr:nth-child(even){
+            background-color: #BFBFBF;
+        }
+        .ticket-manage-wrapper{
+            background-color: rgba(0, 0, 0, .3);
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+        }
+        .ticket-manage-wrapper .shadow {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #abaaaa;
+            border-radius: 5px;
+        }
+        .ticket-manage-wrapper .shadow .box {
+            width: 522px;
+            margin: 5px 0 0 5px ;
+        }
+        .ticket-manage-wrapper .shadow .box input {
+            border-radius: 3px;
+            border: 1px solid #b1b1b1;
+        }
+        .ticket-manage-wrapper .shadow .box .butn button,.ticket-manage-wrapper .shadow .box .butn div{
+            width: 100px ;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            border-radius: 4px;
+            border: 0 solid #fff;
+        }
+        #table-noborder td{
+            text-align: center;
+            border: none;
+        }
+        #tic_man_det_mini tr:nth-child(odd){
+            background-color: #F7F7F6;
+        }
+        /*开奖号码*/
+        .manage-number{
+            overflow: hidden;
+        }
+        .manage-number span, .ticket-number ul {
+            float: left;
+        }
+        .manage-number ul li{
+            float: left;
+            width: 30px;
+            height: 30px;
+            background-color: #f06666;
+            border-radius: 50%;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+        }
+        .manage-number ul .blueball{
+            background-color: #00A0E9;
+        }
+    </style>
+    <div class="cy_main">
+        <!-- 上部导航 -->
+        <div id="path" class="path">
+            <span class="firstLevel"></span>
+            <span class="secondLevel"></span>
+        </div>
+        <!-- 背景白框 -->
+        <div class="cy_radius cy_white">
+            <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center;" >
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th>派奖彩种</th>
+                        <th colspan="8">派奖期次</th>
+                    </tr>
+                </thead>
+                <tbody id="ticket_manage_mini">
+                    <!-- <tr>
+                       <td>{{.Tel}}</td>
+                       <td>{{.ID}}</td>
+                       <td>{{.Channel}}</td>
+                       <td>{{.Value}}</td>
+                       <td>{{.Data}}</td>
+                       <td>{{.Status}}</td>
+                     </tr>-->
+                    <tr>
+                        <td>双色球</td>
+                        <td colspan="8" style="color: #F74E65">
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2015</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2018</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>快三</td>
+                        <td colspan="8" style="color: #F74E65">
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2024</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>七乐彩</td>
+                        <td colspan="8" style="color: #F74E65">
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2057</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                            <div>2010</div>
+                            <div>2017</div>
+                            <div>2017</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ticket-manage-wrapper" style="display: none">
+            <div class="shadow">
+                <div class="box" style="background: #FEFEFE;">
+                    <p style="height: 30px;background-color:#eee;line-height: 30px;padding-left: 30px;font-weight: bold" class="period"></p>
+                    <div class="manage-number">
+                        <span style="margin:27px 35px 0 20px">开奖号码：</span>
+                        <ul style="margin-top: 20px">
+                            <li>01</li>
+                            <li>01</li>
+                            <li>01</li>
+                            <li class="blueball">01</li>
+                        </ul>
+                    </div>
+                    <div style="height: 1px;background: #DCDCDC;margin: 20px 0 5px"></div>
+                    <table rules="rows" class="table table-hover" id="table-noborder" style="width: 100%">
+                        <thead style="background: #fff">
+                            <tr>
+                                <td>奖项</td>
+                                <td>注数</td>
+                                <td>每注金额</td>
+                            </tr>
+                        </thead>
+                        <tbody id="tic_man_det_mini">
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+                            <tr>
+                                <td>一等奖</td>
+                                <td>2</td>
+                                <td>123</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                    <div style="height: 1px;background: #DCDCDC;margin: 20px 0"></div>
+                    <div class="butn" style="padding: 20px 0;">
+                        <div class="cancel" style="background-color:#88ABDA;cursor: pointer;
+                                            margin:0 100px;display: inline-block">返回</div>
+                        <button class="count_order" style="background-color:#fb4949;">计算订单</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lay-page-12" class="lay-page-default"></div>
+    </div>
+{{end}}

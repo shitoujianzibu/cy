@@ -1,0 +1,123 @@
+{{define "ticket_auto"}}
+    <style>
+        .daikaijiang{
+            color: red;
+        }
+        .yipaijiang{
+            color: #64913A;
+        }
+        .ticket_auto_btn{
+            width: 144px;
+            height: 48px;
+            font-family: "MyriadPro Regular";
+            font-size: 14px;
+            color: #666;
+            line-height: 48px;
+            text-align: center;
+            border: 1px solid #D2D2D2;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .autoticket_wrapper{
+            position: absolute;
+            right: 80px;
+            bottom: 40px;
+        }
+        .ticket_auto_btn:hover{
+            border: 1px solid #DCDCDC;
+            background-color: #efefef;
+        }
+        .ticket_auto_btn:active{
+            background-color: #ddd;
+        }
+    </style>
+    <div class="cy_main">
+        <!-- 上部导航 -->
+        <div id="path" class="path">
+            <span class="firstLevel"></span>
+            <span class="secondLevel"></span>
+        </div>
+        <!-- 背景白框 -->
+        <div class="cy_radius cy_white" style="position: relative">
+            <form class="form-inline" method="" autocomplete="off">
+                <!-- 一个选择框 -->
+                <div class="form-group"  style="margin-left: 40%" >
+                    <label></label>
+                    <select class="form-control ticauto_type" style="font-family: AdobeHeitiStd Regular;margin-right: 50px" name="ticket_type">
+                        <option value="20170202">2017-02-02</option>
+                        <option value="20170202">2017-02-02</option>
+                        <option value="20170202">2017-02-02</option>
+                        <option value="20170202">2017-02-02</option>
+                        <option value="20170202">2017-02-02</option>
+                        <option value="20170202">2017-02-02</option>
+                    </select>
+                </div>
+                <button type="button" class="btn  search-btn ticketauto_btn" >搜索</button>
+            </form>
+            <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
+                <thead>
+                    <tr>
+                        <th>账户</th>
+                        <th>派奖单号</th>
+                        <th>派奖彩种</th>
+                        <th>派奖期次</th>
+                        <th>中奖奖项</th>
+                        <th>中奖金额</th>
+                        <th>税后奖金</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="ticket_auto_mini">
+                    <!-- <tr>
+                       <td>{{.Tel}}</td>
+                       <td>{{.ID}}</td>
+                       <td>{{.Channel}}</td>
+                       <td>{{.Value}}</td>
+                       <td>{{.Data}}</td>
+                       <td>{{.Status}}</td>
+                     </tr>-->
+                    <tr>
+                        <td>wx1234</td>
+                        <td>12312312432432</td>
+                        <td>双色球</td>
+                        <td>201702</td>
+                        <td><span style="color: red">一等奖</span></td>
+                        <td>599</td>
+                        <td>688</td>
+                        <td><span class="daikaijiang yipaijiang">待开奖</span></td>
+                        <td><span>详情</span></td>
+                    </tr>
+                    <tr>
+                        <td>wx1234</td>
+                        <td>12312312432432</td>
+                        <td>双色球</td>
+                        <td>201702</td>
+                        <td><span style="color: red">一等奖</span></td>
+                        <td>599</td>
+                        <td>688</td>
+                        <td><span class="daikaijiang yipaijiang">待开奖</span></td>
+                        <td><span>详情</span></td>
+                    </tr>
+                    <tr>
+                        <td>wx1234</td>
+                        <td>12312312432432</td>
+                        <td>双色球</td>
+                        <td>201702</td>
+                        <td><span style="color: red">一等奖</span></td>
+                        <td>599</td>
+                        <td>688</td>
+                        <td><span class="daikaijiang yipaijiang">待开奖</span></td>
+                        <td><span>详情</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="autoticket_wrapper">
+                <div class="ticket_auto_btn">自动派奖</div>
+                <p style="text-align: center;color: #db5757;margin-top: 10px">(仅支持小额奖金)</p>
+            </div>
+
+        </div>
+        <div id="lay-page-10" class="lay-page-default"></div>
+    </div>
+{{end}}

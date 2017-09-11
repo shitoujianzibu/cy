@@ -152,9 +152,12 @@
                 <div class="ticket_out" style="display:none;">{{template "ticket_out" .}}</div>
                 <div class="ticket_win" style="display:none;">{{template "ticket_win" .}}</div>
                 <div class="ticket_win_detail" style="display:none;">{{template "ticket_win_detail" .}}</div>
+                <div class="ticket_auto" style="display:none;">{{template "ticket_auto" .}}</div>
+                <div class="ticket_special" style="display:none;">{{template "ticket_special" .}}</div>
                 <div class="ticket_set" style="display:none;">{{template "ticket_set" .}}</div>
                 <div class="ticket_trace" style="display:none;">{{template "ticket_trace" .}}</div>
                 <div class="ticket_trace_detail" style="display:none;">{{template "ticket_trace_detail" .}}</div>
+                <div class="ticket_manage" style="display:none;">{{template "ticket_manage" .}}</div>
                 <div class="withdraw_check" style="display:none;">{{template "withdraw_check" .}}</div>
                 <div class="withdraw_succeed" style="display:none;">{{template "withdraw_succeed" .}}</div>
                 <div class="charge_detail" style="display:none;">{{template "charge_detail" .}}</div>
@@ -368,7 +371,7 @@
                     }
                 },
                 axisTick: {
-                    show:false,
+                    show:false
                 }
             }
         };
@@ -428,16 +431,16 @@
         $('.amend-usermsg-mask').css('height', height);
         $('.amend').click(function () {
             $('.amend-usermsg-mask').fadeIn()
-        })
+        });
         $('.cancel').click(function () {
             $('.amend-usermsg-mask').fadeOut()
-        })
+        });
         $(window).resize(function () {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
             $('.amend-usermsg-mask').css('width', width);
             $('.amend-usermsg-mask').css('height', height);
-        })
+        });
 
 
         /********************用户个人详情********************/
@@ -508,6 +511,44 @@
         $('.ticwindet-btn').click(function () {
             $('.ticket_win').show().siblings().hide();
         });
+        /********************自动派奖********************/
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-10'
+                ,count: ''
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                }
+            });
+        });
+        /********************特殊派奖********************/
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-11'
+                ,count: ''
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                }
+            });
+        });
+        // 特殊派奖状态
+        $('#ticket_spec_mini  > tr > td:nth-child(8)').click(function () {
+            if ($(this).children('span').hasClass('yipaijiang')) {
+                return
+            }
+            $(this).children('span').addClass('yipaijiang').html('已派奖');
+           /* layer.confirm('确定派奖吗？', {
+                btn: ['确定', '取消']
+            },() => {
+                layer.msg('派奖中');
+                 $(this).children('span').addClass('yipaijiang').html('已派奖');
+            },function () {
+            });*/
+        });
 
         /********************彩种设置********************/
         $('.ticket_set_wrapper .sell').click(function () {
@@ -527,17 +568,53 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-
-
                 }
             });
         });
         $('#ticket_trace_mini  > tr > td:last-child').click(function () {
             $('.ticket_trace_detail').show().siblings().hide();
         });
+
         /********************追号管理详情********************/
         $('.tictradet-btn').click(function () {
             $('.ticket_trace').show().siblings().hide();
+        });
+
+        /********************开奖管理********************/
+        var ticketType, qici;
+        $('#ticket_manage_mini').on('click', 'div', function (e) {
+            // 点击的是哪个期次的
+            ticketType = $($(e.target).parent()[0].previousSibling.previousSibling).text();
+            qici = $(e.target).text();
+            $('.period').html(ticketType +" "+ qici + '期');
+            // console.log(ticketType, qici);
+            $('.ticket-manage-wrapper').fadeIn();
+            console.log( $('.ticket-manage-wrapper .shadow .box').height());
+            $('.ticket-manage-wrapper .shadow').css('width', $('.ticket-manage-wrapper .shadow .box').width()+10);
+            $('.ticket-manage-wrapper .shadow').css('height', $('.ticket-manage-wrapper .shadow .box').height()+10);
+        });
+        $('.count_order').click(function () {
+            $('.ticket-manage-wrapper').fadeOut();
+            layer.msg(ticketType+"，"+qici+"期，"+'正在计算......',{
+                time: 2000 // 这个时间可以动态修改
+            }, function () {
+               layer.msg('计算成功', {icon: 1, time: 1000})
+            })
+        });
+        $('.cancel').click(function () {
+            $('.ticket-manage-wrapper').fadeOut()
+        });
+
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'lay-page-12'
+                ,count: 99
+                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                ,jump: function(obj){
+                }
+            });
         });
         /********************提现审核********************/
         laydate.render({
@@ -633,7 +710,7 @@
             var uploadInst = upload.render({
                 elem: '#upload' //绑定元素
                 ,choose: function (obj) {
-                    ;
+
                 }
                 ,url: '/manage/PlatformActivity/'//上传接口
                 ,done: function(res){
@@ -646,7 +723,7 @@
         });
         var imgSrc = $('#upload').css('backgroundImage').slice(5, -2)
         // $('.preview').attr('src', imgSrc)
-        console.log(imgSrc);
+        // console.log(imgSrc);
 
         //var width = document.documentElement.clientWidth;
         //var height = document.documentElement.clientHeight;
@@ -663,8 +740,7 @@
             var height = document.documentElement.clientHeight;
             $('.add-activiity-wrapper').css('width', width);
             $('.add-activiity-wrapper').css('height', height);
-        })
-
+        });
 
         /********************意见反馈********************/
         laydate.render({
