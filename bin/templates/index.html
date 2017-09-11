@@ -264,6 +264,18 @@
             if (result) {
                 // 发请求
                 console.log(result);
+                $.ajax({
+                    url:'/manage/static/data/data.json',
+                    type: 'post',
+                    success: function (data) {
+                        console.log(data);
+                        
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        
+                    }
+                });
                 $.get('/manage/static/data/data.json', function (data, status) {
                     console.log(data, status);
                 })
@@ -757,7 +769,6 @@
                 ,count: 99
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
-
                 }
             });
         });
