@@ -32,6 +32,7 @@ func main() {
 		m.Get("/index/", handler.Index)
 
 		m.Post("/login/", handler.LoginP)
+		m.Post("/test/", handler.Test)
 	}
 	app.Listen(":8080") //cfg.Port
 }
