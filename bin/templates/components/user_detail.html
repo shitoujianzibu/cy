@@ -10,9 +10,9 @@
             <!-- 日期和筛选 -->
             <form class="form-inline"style="overflow: hidden" autocomplete="off">
                 <div class="form-group" style="float: left;margin-right: 6px;margin-left: 40%">
-                    <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="">
+                    <input type="text" class="form-control user_det_phone" id="tel" placeholder="输入用户名或手机号" name="username" value="">
                 </div>
-                <button type="submit" class="btn  search-btn" style="float: left;">搜索</button>
+                <button type="button" class="btn user_det_btn search-btn" style="float: left;">搜索</button>
             </form>
 
             <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center !important;" >
@@ -28,21 +28,21 @@
                     </tr>
                 </thead>
                 <tbody id="user_detail_mini">
-                <!-- <tr>
-                   <td>{{.Tel}}</td>
-                   <td>{{.ID}}</td>
-                   <td>{{.Channel}}</td>
-                   <td>{{.Value}}</td>
-                   <td>{{.Data}}</td>
-                   <td>{{.Status}}</td>
-                 </tr>-->
+                    <!-- <tr>
+                       <td>{{.Tel}}</td>
+                       <td>{{.ID}}</td>
+                       <td>{{.Channel}}</td>
+                       <td>{{.Value}}</td>
+                       <td>{{.Data}}</td>
+                       <td>{{.Status}}</td>
+                     </tr>-->
                     <tr>
                         <td>wx1234</td>
                         <td>12312312432432</td>
                         <td>25</td>
                         <td>500</td>
                         <td>17-4-3</td>
-                        <td>已完善</td>
+                        <td>{{.StartDate}}</td>
                         <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
                     </tr>
                     <tr>

@@ -38,7 +38,7 @@
                         <!-- 一个选择框 -->
                         <div class="form-group"  style="margin-left: 20px" >
                             <label>明细类型</label>
-                                <select class="form-control" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
+                                <select class="form-control useracc_tickettype" style="font-family: AdobeHeitiStd Regular;background-color:#eee;">
                                     <option value="all">全部</option>
                                     <option value="double_color">双色球</option>
                                     <option value="fucai3d">福彩3d</option>
@@ -48,20 +48,18 @@
                                 </select>
                         </div>
                         <div class="form-group user_acc_res2">
-                            <input type="text" class="form-control" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
+                            <input type="text" class="form-control useracc_phone" id="tel" placeholder="输入用户名或手机号" name="username" value="" style="background-color:#eee;">
                         </div>
-                        <button type="submit" class="btn  search-btn" >搜索</button>
+                        <button type="button" class="btn useraccder_btn search-btn" >搜索</button>
                     </form>
                     <table class="table table-bordered table-striped table-hover table-top" style="margin-top: 46px;text-align: center" >
                         <thead>
                         <tr>
-                            <th>账户名称</th>
-                            <th>手机号</th>
-                            <th>账户余额</th>
-                            <th>账户收益</th>
-                            <th>注册时间</th>
-                            <th>身份信息</th>
-                            <th>操作</th>
+                            <th>用户名</th>
+                            <th>订单号</th>
+                            <th>XXXXX</th>
+                            <th>明细额度</th>
+                            <th>详情时间</th>
                         </tr>
                         </thead>
                         <tbody id="mini">
@@ -79,8 +77,6 @@
                             <td>25</td>
                             <td>500</td>
                             <td>17-4-3</td>
-                            <td>已完善</td>
-                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
                         </tr>
                         <tr>
                             <td>wx1234</td>
@@ -88,8 +84,14 @@
                             <td>25</td>
                             <td>500</td>
                             <td>17-4-3</td>
-                            <td>已完善</td>
-                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
+
+                        <tr>
+                            <td>wx1234</td>
+                            <td>12312312432432</td>
+                            <td>25</td>
+                            <td>500</td>
+                            <td>17-4-3</td>
+
                         </tr>
                         <tr>
                             <td>wx1234</td>
@@ -97,17 +99,6 @@
                             <td>25</td>
                             <td>500</td>
                             <td>17-4-3</td>
-                            <td>已完善</td>
-                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
-                        </tr>
-                        <tr>
-                            <td>wx1234</td>
-                            <td>12312312432432</td>
-                            <td>25</td>
-                            <td>500</td>
-                            <td>17-4-3</td>
-                            <td>已完善</td>
-                            <td><img src="/manage/static/img/datapicker.png" alt="" width="26px" height="26px"></td>
                         </tr>
                         </tbody>
                     </table>

@@ -172,19 +172,19 @@
 
        // 查询日期种类
         /*
-        * start: 开始日期 input 的class名
-        * end: 结束日期 input 的class名
-        * type: 查询种类 select 的class名
+        * start: 开始日期 input
+        * end: 结束日期 input
+        * type: 查询种类 select 
         * phone: 查询手机号 input 的class名
         * */
 
         function query(start, end, type, phone) {
             // 起始日期 和 结束日期
-            var stratDate = $('.' + start).val();
-            var endDate = $('.' + end).val();
+            var stratDate = start ? $(start).val() : '';
+            var endDate = end ? $(end).val() : '';
             // 彩票类型
-            var checktype = $('.' + type).children('option:selected').val();
-            var phoneNumber = phone ? $('.' + phone).val() : '';
+            var checktype =type ? $(type).children('option:selected').val() : '';
+            var phoneNumber = phone ? $(phone).val() : '';
             if (!stratDate || !endDate) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
@@ -204,113 +204,119 @@
                 }
             }
         }
+        // 投注量图表
+        var myChart = echarts.init(document.getElementById('myChart'));
+
+        // 指定图表的配置项和数据
+        function chartList(lotteryType, lotteryNum) {
+            var option = {
+                color: [''],
+                title: {
+                    text: ''
+                },
+                tooltip: {},
+                legend: {
+                    data:['']
+                },
+                axis:{
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine:{
+                        color: '#48b',
+                        width: 2,
+                        type: 'solid'
+                    }
+                },
+                series: [
+                    {
+                        name:'销量',
+                        type:'bar',
+                        itemStyle: {
+                            normal:{
+                                color: function(params) {
+                                    // build a color map as your need.
+                                    var colorList = [
+                                        '#b7b8b8','#dedfdf',
+                                    ];
+                                    return colorList[params.dataIndex % 2]
+                                },
+                                label: {
+                                    show: true,
+                                    textStyle: {
+                                        color: '#a6a6a6'
+                                    },
+                                    position: 'top'
+                                }
+                            }
+                        },
+                        barWidth: '70%',
+                        data: lotteryNum
+                    }
+                ],
+                xAxis: [
+                    {
+                        axisLine:{
+                            show: true,
+                            lineStyle: {
+                                color: '#848484',
+                                type: 'solid',
+                                width: 3,
+                                shadowOffsetY: 0,
+                                shadowBlur: 0
+                            }
+                        },
+                        axisTick: {
+                            show:false
+                        },
+                        data: lotteryType
+                    }
+                ],
+                yAxis: {
+                    axisLine:{
+                        show: true,
+                        lineStyle: {
+                            color: '#848484',
+                            type: 'solid',
+                            width: 4,
+                            shadowOffsetY: 0
+                        }
+                    },
+                    axisTick: {
+                        show:false
+                    }
+                }
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+        // 初始投注数据显示
+        var lotteryType = ["双色球","福彩3d","七乐彩","时时彩","快三","七星彩", "排列三", "排列五"];
+        var lotteryNum = [1, 10, 22, 33, 33, 55, 66, 16];
+
+        chartList(lotteryType, lotteryNum);
+
         $('.statistic_btn').click(function () {
-            var result = query('laydate1', 'laydate2', 'sta_tickettype');
+            var result = query('.laydate1', '.laydate2', '.sta_tickettype');
             if (result) {
                 // 发请求
                 console.log(result);
                 $.ajax({
-                    url:'/manage/test',
+                    url:'/manage/statistics',
                     type: 'post',
                     data: result,
                     success: function (data) {
                         console.log(JSON.stringify(data));
+                        // 更新投注量和echarts
                         $('.tzl').html(data.tzl);
                         $('.tzje').html(data.tzje);
                         $('.tzyh').html(data.tzyh);
-                        var chartArr = data.chart
-                        var myChart = echarts.init(document.getElementById('myChart'));
-                        // 指定图表的配置项和数据
-
-                        var option = {
-                            color: [''],
-                            title: {
-                                text: ''
-                            },
-                            tooltip: {},
-                            legend: {
-                                data:['']
-                            },
-                            axis:{
-                                axisTick: {
-                                    show: false
-                                },
-                                axisLine:{
-                                    color: '#48b',
-                                    width: 2,
-                                    type: 'solid'
-                                }
-                            },
-                            series: [
-                                {
-                                    name:'销量',
-                                    type:'bar',
-                                    itemStyle: {
-                                        normal:{
-                                            color: function(params) {
-                                                // build a color map as your need.
-                                                var colorList = [
-                                                    '#b7b8b8','#dedfdf',
-                                                ];
-                                                return colorList[params.dataIndex % 2]
-                                            },
-                                            label: {
-                                                show: true,
-                                                textStyle: {
-                                                    color: '#a6a6a6'
-                                                },
-                                                position: 'top'
-                                            }
-                                        }
-                                    },
-                                    barWidth: '70%',
-                                    data: chartArr
-                                }
-                            ],
-                            xAxis: [
-                                {
-                                    axisLine:{
-                                        show: true,
-                                        lineStyle: {
-                                            color: '#848484',
-                                            type: 'solid',
-                                            width: 3,
-                                            shadowOffsetY: 0,
-                                            shadowBlur: 0
-                                        }
-                                    },
-                                    axisTick: {
-                                        show:false
-                                    },
-                                    data: ["双色球","福彩3d","七乐彩","时时彩","快三","七星彩", "排列三", "排列五"]
-                                }
-                            ],
-                            yAxis: {
-                                axisLine:{
-                                    show: true,
-                                    lineStyle: {
-                                        color: '#848484',
-                                        type: 'solid',
-                                        width: 4,
-                                        shadowOffsetY: 0
-                                    }
-                                },
-                                axisTick: {
-                                    show:false
-                                }
-                            }
-                        };
-                        // 使用刚指定的配置项和数据显示图表。
-                        myChart.setOption(option);
+                        chartList(lotteryType, data.chart);
                     },
                     error: function (err) {
                         console.log(err+'--------   ');
-                        
                     }
                 });
-                $.get('/manage/static/data/data.json', function (data, status) {
-                    console.log(data, status);
-                })
             }
         });
 
@@ -338,120 +344,8 @@
                 console.log(type);
             }
         });*/
-
-        var myChart = echarts.init(document.getElementById('myChart'));
-        // 指定图表的配置项和数据
-
-        var option = {
-            color: [''],
-            title: {
-                text: ''
-            },
-            tooltip: {},
-            legend: {
-                data:['']
-            },
-            axis:{
-                axisTick: {
-                    show: false
-                },
-                axisLine:{
-                    color: '#48b',
-                    width: 2,
-                    type: 'solid'
-                }
-            },
-            series: [
-                {
-                    name:'销量',
-                    type:'bar',
-                    itemStyle: {
-                        normal:{
-                            color: function(params) {
-                                // build a color map as your need.
-                                var colorList = [
-                                    '#b7b8b8','#dedfdf',
-                                ];
-                                return colorList[params.dataIndex % 2]
-                            },
-                            label: {
-                                show: true,
-                                textStyle: {
-                                    color: '#a6a6a6'
-                                },
-                                position: 'top'
-                            }
-                        }
-                    },
-                    barWidth: '70%',
-                    data: [2,100,3]
-                }
-            ],
-            xAxis: [
-                {
-                    axisLine:{
-                        show: true,
-                        lineStyle: {
-                            color: '#848484',
-                            type: 'solid',
-                            width: 3,
-                            shadowOffsetY: 0,
-                            shadowBlur: 0
-                        }
-                    },
-                    axisTick: {
-                        show:false
-                    },
-                    data: ["双色球","福彩3d","七乐彩","时时彩","快三","七星彩", "排列三", "排列五"]
-                }
-            ],
-            yAxis: {
-                axisLine:{
-                    show: true,
-                    lineStyle: {
-                        color: '#848484',
-                        type: 'solid',
-                        width: 4,
-                        shadowOffsetY: 0
-                    }
-                },
-                axisTick: {
-                    show:false
-                }
-            }
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        /*var ctx = $("#myChart").get(0).getContext("2d");
-        var bardata = {
-            labels : ["双色强","福彩3d","七乐彩","时时彩","快3","七星彩","排列三","排列五"],
-            datasets : [{
-                label:"投注量",
-                backgroundColor : "rgba(220,220,220,0.5)",
-                borderColor : "rgba(220,220,220,1)",
-                data : [230000,600000,280000,400000,560000,900000,400000,80000]
-            }]
-        };
-        window.myBar = new Chart(ctx,{
-            type:'bar',
-            data:bardata,
-            option:{
-                elements:{
-                    rectangle: {
-                        borderWidth:2,
-                        barWidth: 6
-                    }
-                },
-                responsive:true,
-                legend:{
-                    position: 'right',
-                },
-                title:{
-                    display:true,
-                    text: 'chart.js h bar',
-                }
-            }
-        });*/
+       
+       
         /********************用户信息********************/
         layui.use('laypage', function(){
             var laypage = layui.laypage;
@@ -465,15 +359,64 @@
                 }
             });
         });
-        $('#user_detail_mini > tr > td:last-child').click(function () {
-            $('.user_detail_msg').show().siblings().hide();
+
+        $('.user_det_btn').click(function () {
+            $('#user_detail_mini').html('');
+            var phoneNumber = $('.user_det_phone').val();
+            var reg = /^1[34578]\d{9}/;
+            if (!reg.test(phoneNumber)) {
+                layer.msg('请输入正确手机号');
+            } else {
+                $.ajax({
+                    url: "/manage/user_detail",
+                    type: "post",
+                    data: {
+                        phoneNumber: phoneNumber
+                    },
+                    success: function (data) {
+                        var objKeys = Object.keys(data);
+                        // 点击查看详情
+                        $('#user_detail_mini').on("click", "tr > td:last-child", function (e) {
+                            $('.user_detail_msg').show().siblings().hide();
+                            console.log(e.target.parentElement.innerHTML);
+                        });
+                        $.each(data, function (index, item) {
+                            // 数据如果是分组的 点击下一页 换一组 如果是全部 将他们分成10个一组显示
+                            var tBody = '';
+                           tBody += "<tr>" +
+                                "<td>"+item[0]+"</td>" +
+                                "<td>"+item[1]+"</td>" +
+                                "<td>"+item[2]+"</td>" +
+                                "<td>"+item[3]+"</td>" +
+                                "<td>"+item[4]+"</td>" +
+                                "<td>"+item[5]+"</td>" +
+                                "<td><img src='/manage/static/img/datapicker.png' width='26px' height='26px'></td>" +
+                            "</tr>";
+                            $('#user_detail_mini').append(tBody);
+                            var laypage = layui.laypage;
+                            laypage.render({
+                                elem: 'lay-page-1'
+                                ,count: objKeys.length
+                                ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                                ,jump: function(obj, first){
+                                    //console.log(obj, first);
+                                }
+                            });
+                        });
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+                console.log(phoneNumber);
+            }
+
         });
 
         /********************用户详情信息********************/
         var width = document.documentElement.clientWidth;
         var height = document.documentElement.clientHeight;
-        $('.amend-usermsg-mask').css('width', width);
-        $('.amend-usermsg-mask').css('height', height);
+        $('.amend-usermsg-mask').css('width', width).css('height', height);
         $('.amend').click(function () {
             $('.amend-usermsg-mask').fadeIn()
         });
@@ -483,12 +426,11 @@
         $(window).resize(function () {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
-            $('.amend-usermsg-mask').css('width', width);
-            $('.amend-usermsg-mask').css('height', height);
+            $('.amend-usermsg-mask').css('width', width).css('height', height);
         });
 
 
-        /********************用户个人详情********************/
+        /********************用户账户详情********************/
         laydate.render({
             elem: '.laydate3' //指定元素
         });
@@ -507,6 +449,26 @@
                 }
             });
         });
+        $('.useraccder_btn').click(function () {
+            var result = query('.laydate3', '.laydate4', '.useracc_tickettype', '.useracc_phone');
+            $.ajax({
+                url: '/manage/user_account_detail',
+                type: "post",
+                data: result,
+                success: function (data) {
+                    console.log(data);
+                    var arr = [];
+                    $.each(data, function (index, item) {
+                        console.log(item);
+                        
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
 
 
         /********************中奖派奖********************/
@@ -535,7 +497,6 @@
                 $.get('/manage/static/data/data.json', function (data) {
                     console.log(data);
                     layui.use('laypage', function(){
-                        var laypage = layui.laypage;
                         //执行一个laypage实例
                         laypage.render({
                             elem: 'lay-page-3'
@@ -586,13 +547,6 @@
                 return
             }
             $(this).children('span').addClass('yipaijiang').html('已派奖');
-           /* layer.confirm('确定派奖吗？', {
-                btn: ['确定', '取消']
-            },() => {
-                layer.msg('派奖中');
-                 $(this).children('span').addClass('yipaijiang').html('已派奖');
-            },function () {
-            });*/
         });
 
         /********************彩种设置********************/
@@ -757,9 +711,10 @@
                 ,choose: function (obj) {
 
                 }
-                ,url: '/manage/PlatformActivity/'//上传接口
+                ,url: '/manage/statistics/'//上传接口
                 ,done: function(res){
                     //上传完毕回调
+                    console.log(res);
                 }
                 ,error: function(){
                     //请求异常回调

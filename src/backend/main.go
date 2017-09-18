@@ -32,7 +32,9 @@ func main() {
 		m.Get("/index/", handler.Index)
 
 		m.Post("/login/", handler.LoginP)
-		m.Post("/test/", handler.Test)
+		m.Post("/statistics/", handler.Statistics)
+		m.Post("/user_detail/", handler.UserDetail)
+		m.Post("/user_account_detail", handler.UserAccountDetail)
 	}
 	app.Listen(":8080") //cfg.Port
 }

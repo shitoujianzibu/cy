@@ -233,6 +233,13 @@ th {
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
 	vertical-align: middle;
 }
+.form-inline .form-group{
+	display: inline-block;
+}
+.form-control {
+	display: inline-block;
+	width: auto;
+}
 
 /*底部返回按钮样式*/
 .back-btn {
