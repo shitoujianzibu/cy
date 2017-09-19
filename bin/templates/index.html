@@ -141,7 +141,7 @@
             // 点击li 默认选中第一个子li
             $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item')
             // 点击父li跳转到默认第一个li
-            var classN = $(this).attr('class').slice(4)
+            var classN = $(this).attr('class').slice(4);
             $('.'+classN).show().siblings().hide();
         });
         $('.for-left-item').click(function (e) {
@@ -158,6 +158,10 @@
         });
         var leftHeight = document.documentElement.clientHeight-55;
         $('.left-wrapper').css('height', leftHeight );
+        $(window).resize(function () {
+            var leftHeight = document.documentElement.clientHeight-55;
+            $('.left-wrapper').css('height', leftHeight );
+        });
 
         /******************** path路径 ********************/
 
@@ -180,24 +184,24 @@
 
         function query(start, end, type, phone) {
             // 起始日期 和 结束日期
-            var stratDate = start ? $(start).val() : '';
+            var startDate = start ? $(start).val() : '';
             var endDate = end ? $(end).val() : '';
             // 彩票类型
             var checktype =type ? $(type).children('option:selected').val() : '';
             var phoneNumber = phone ? $(phone).val() : '';
-            if (!stratDate || !endDate) {
+            if (!startDate || !endDate) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     layer.msg('请选择日期');
                 });
-            } else if (parseInt(stratDate.split('-').join('')) > parseInt(endDate.split('-').join(''))) {
+            } else if (parseInt(startDate.split('-').join('')) > parseInt(endDate.split('-').join(''))) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     layer.msg('起始日期不能大于结束日期');
                 });
             } else {
                 return {
-                    startDate: stratDate,
+                    startDate: startDate,
                     endDate: endDate,
                     checktype: checktype,
                     phoneNumber: phoneNumber
@@ -322,24 +326,24 @@
 
        /* $('.statistic_btn').click(function () {
             // 起始日期 和 结束日期
-            var stratDate = $('.laydate1').val();
+            var startDate = $('.laydate1').val();
             var endDate = $('.laydate2').val();
             // 彩票类型
             var type = $('.sta_tickettype').children('option:selected').val();
 
-            if (!stratDate || !endDate) {
+            if (!startDate || !endDate) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     layer.msg('请选择日期');
                 });
-            } else if (parseInt(stratDate.split('-').join('')) > parseInt(endDate.split('-').join(''))) {
+            } else if (parseInt(startDate.split('-').join('')) > parseInt(endDate.split('-').join(''))) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     layer.msg('起始日期不能大于结束日期');
                 });
             } else {
                 // 发请求
-                console.log(stratDate);
+                console.log(startDate);
                 console.log($('.laydate2').val());
                 console.log(type);
             }
@@ -468,8 +472,16 @@
                 }
             })
         });
+        /********************出票详情********************/
+        // 判断状态码 更新进度条 0 1 2 3
+        var ticOutSm = $('.ticket_out_sm');
 
-
+        ticOutSm.css("width", "33.33%");
+        $('.ticket_out_one').css("background", "#FF605E");
+        $('.ticket_out_two').css("background", "#FF605E");
+        $('.ticket_out_three').css("background", "#FF605E");
+        ticOutSm.css("width", "66.66%");
+        ticOutSm.css("width", "99.99%");
 
         /********************中奖派奖********************/
         laydate.render({
@@ -509,14 +521,17 @@
                 })
             }
         });
-
+        // 点击查看详情
         $('#ticket_win_mini > tr > td :last-child').click(function () {
             $('.ticket_win_detail').show().siblings().hide();
+
         });
+
         /********************中奖派奖详情********************/
         $('.ticwindet-btn').click(function () {
             $('.ticket_win').show().siblings().hide();
         });
+
         /********************自动派奖********************/
         layui.use('laypage', function(){
             var laypage = layui.laypage;
@@ -529,6 +544,30 @@
                 }
             });
         });
+        $('#ticket_auto').click(function () {
+            $('.ticauto_type').html("");
+            $.ajax({
+                url: "/manage/ticket_auto",
+                type: "post",
+                success: function (data) {
+                    var qici = JSON.stringify(data.qici).slice(1, -1).split(",");
+                    $.each(qici, function (index, item) {
+                        var optionD = '';
+                        // 生成下拉列表期次
+                        optionD += '<option value="'+item+'">'+item+'</option>';
+                        $('.ticauto_type').append(optionD)
+                    });
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+        $('.ticketauto_btn').click(function () {
+            console.log($('.ticauto_type').val()); 
+        });
+
         /********************特殊派奖********************/
         layui.use('laypage', function(){
             var laypage = layui.laypage;
@@ -588,7 +627,6 @@
             $('.period').html(ticketType +" "+ qici + '期');
             // console.log(ticketType, qici);
             $('.ticket-manage-wrapper').fadeIn();
-            console.log( $('.ticket-manage-wrapper .shadow .box').height());
             $('.ticket-manage-wrapper .shadow').css('width', $('.ticket-manage-wrapper .shadow .box').width()+10);
             $('.ticket-manage-wrapper .shadow').css('height', $('.ticket-manage-wrapper .shadow .box').height()+10);
         });
@@ -704,42 +742,90 @@
         });
         layui.use('upload', function(){
             var upload = layui.upload;
-
             //执行实例
             var uploadInst = upload.render({
-                elem: '#upload' //绑定元素
+                elem: '#upload' // 绑定元素
+                ,url: '/manage/platform_activity/'// 上传接口
+                ,auto: false
+                ,accept: "images"
+                ,bindAction: ".plaact_btn"
                 ,choose: function (obj) {
+                    obj.preview(function (index, file, result) {
+                        // console.log(index);
+                        // console.log(file);
+                        // console.log(result);
+                        // 预览选中活动图
+                        var imgDom = $('<img src = "'+result+'">');
+                        $('.preview_wrap').append(imgDom);
+                        imgDom.click(function (e) {
+                            var _this = $(this);
+                            _this.css({"transform": "scale(7)"});
+                            e.stopPropagation();
+                            $('.add-activiity-wrapper').click(function () {
+                                _this.css({"transform": "scale(1)"})
+                            });
+                        });
 
+                        $('.pla_cancel').click(function () {
+                            $('.preview_wrap').empty(imgDom);
+                            $('.add-activiity-wrapper').fadeOut();
+                        });
+                    });
                 }
-                ,url: '/manage/statistics/'//上传接口
+                ,before: function (obj) {
+                    //console.log(obj);
+                }
                 ,done: function(res){
                     //上传完毕回调
-                    console.log(res);
+                    //console.log(res);
                 }
                 ,error: function(){
                     //请求异常回调
                 }
             });
         });
-        var imgSrc = $('#upload').css('backgroundImage').slice(5, -2)
-        // $('.preview').attr('src', imgSrc)
-        // console.log(imgSrc);
+        $('.plaact_btn').click(function () {
+            var startDate = $('.laydate15').val();
+            var endDate = $('.laydate16').val();
+            var activityName = $('#active-name').val();
+            if (!startDate || !endDate || !activityName || !$('.preview_wrap').children().length) {
+                layer.msg('请正确填写');
+            } else if (parseInt(startDate.split('-').join('')) > parseInt(endDate.split('-').join(''))){
+                layer.msg('起始日期不能大于结束日期');
+            }else {
+                $.ajax({
+                    url:  '/manage/platform_activity/',
+                    type: "post",
+                    data: {
+                        startDate: startDate,
+                        endDate: endDate,
+                        activityName: activityName
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+                $('.preview_wrap').empty();
+                $('.add-activiity-wrapper').fadeOut();
+            }
+        });
+        $('.pla_cancel').click(function () {
+            $('.add-activiity-wrapper').fadeOut();
+        });
 
-        //var width = document.documentElement.clientWidth;
-        //var height = document.documentElement.clientHeight;
-        $('.add-activiity-wrapper').css('width', width);
-        $('.add-activiity-wrapper').css('height', height);
+
+        $('.add-activiity-wrapper').css('width', width).css('height', height);
         $('.banner_wrapper ul li:last-child').click(function () {
             $('.add-activiity-wrapper').fadeIn()
         });
-        $('.cancel').click(function () {
-            $('.add-activiity-wrapper').fadeOut()
-        });
+
         $(window).resize(function () {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
-            $('.add-activiity-wrapper').css('width', width);
-            $('.add-activiity-wrapper').css('height', height);
+            $('.add-activiity-wrapper').css('width', width).css('height', height);
         });
 
         /********************意见反馈********************/

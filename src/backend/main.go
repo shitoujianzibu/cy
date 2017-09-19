@@ -35,6 +35,7 @@ func main() {
 		m.Post("/statistics/", handler.Statistics)
 		m.Post("/user_detail/", handler.UserDetail)
 		m.Post("/user_account_detail", handler.UserAccountDetail)
+		m.Post("/ticket_auto", handler.TicketAuto)
 	}
 	app.Listen(":8080") //cfg.Port
 }

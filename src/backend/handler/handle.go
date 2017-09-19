@@ -111,6 +111,33 @@ func UserAccountDetail(ctx *iris.Context) {
 	})
 }
 
+type platform_activity struct {
+	Activity  string `form:"activityName"`
+	StartDate string `form:"startDate"`
+	EndDate   string `form:"endDate"`
+}
+
+// 自动派奖获得期次
+func TicketAuto(ctx *iris.Context) {
+	ctx.JSON(iris.StatusOK, iris.Map{
+		"qici": [...]int{20170203, 20170204, 20170205, 20170206, 20170207, 20170208, 20170209},
+	})
+
+}
+
+//平台活动
+func PlatformActivity(ctx *iris.Context) {
+	var p platform_activity
+	err := ctx.ReadForm(&p)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(p)
+	ctx.JSON(iris.StatusOK, iris.Map{
+		"name": "test",
+	})
+}
+
 // LoginP ...
 func LoginP(ctx *iris.Context) {
 	var l slogin
