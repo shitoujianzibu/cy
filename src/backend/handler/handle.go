@@ -131,6 +131,40 @@ func TicketAuto(ctx *iris.Context) {
 
 }
 
+type ticket_auto_list struct {
+	Account      string
+	TicketNum    string
+	TicketType   string
+	TicketQi     string
+	TicketAwards string
+	TicketMoney  string
+	TaxMoney     string
+	State        string
+}
+type ticket_auto_list_table struct {
+	Lines []*ticket_auto_list
+}
+
+// 自动派奖期次列表
+func TicketAutoList(ctx *iris.Context) {
+	var t ticket_auto_list_table
+	t.Lines = make([]*ticket_auto_list, 0, 10)
+	l := &ticket_auto_list{
+		Account:      "liu",
+		TicketNum:    "23423423423",
+		TicketType:   "23423423423",
+		TicketQi:     "23423423423",
+		TicketAwards: "一等奖",
+		TicketMoney:  "23423423423",
+		TaxMoney:     "23423423423",
+		State:        "待开奖",
+	}
+	for i := 0; i < 101; i++ {
+		t.Lines = append(t.Lines, l)
+	}
+	ctx.JSON(iris.StatusOK, t)
+}
+
 //平台活动
 func PlatformActivity(ctx *iris.Context) {
 	var p platform_activity
@@ -153,6 +187,7 @@ func LoginP(ctx *iris.Context) {
 		ctx.WriteString("参数错误")
 		return
 	}
+	fmt.Println(l)
 
 	if l.Pwd != "12345" {
 		// ctx.JSON(iris.StatusOK, common.ResData(false, "密码错误", "", "", nil))

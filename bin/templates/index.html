@@ -116,7 +116,15 @@
         $(window).resize(function () {
             $('.topboard').css('width', document.documentElement.clientWidth);
         });
+        /********************登录********************/
+        $('.login_btn').click(function () {
+           $.ajax({
+               url: "/manage/login",
+               type: "post",
+               data: 
+           })
 
+        });
         /********************退出********************/
         $('.login_out').click(function () {
             layer.confirm('确定退出吗', {
@@ -466,13 +474,13 @@
                         var listArr = []; // 数据按每页分组后存放数组
                         // 限制每页显示条数
                         for (var i = 0,len = listTotal.length; i < len; i += 13) {
-                            listArr.push(data.Lines.slice(i, i+14))
+                            listArr.push(data.Lines.slice(i, i+13))
                         }
                         var laypage = layui.laypage;
                         laypage.render({
                             elem: 'lay-page-2'
                             ,count: listTotal.length
-                            ,limit: 14
+                            ,limit: 13
                             ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                             // 分页被触发时 回调函数 第一次加载时触发第一页
                             ,jump: function(obj){
@@ -571,6 +579,7 @@
                 }
             });
         });
+        // 点击左侧自动派奖获取期次列表
         $('#ticket_auto').click(function () {
             $('.ticauto_type').html("");
             $.ajax({
@@ -584,6 +593,54 @@
                         optionD += '<option value="'+item+'">'+item+'</option>';
                         $('.ticauto_type').append(optionD)
                     });
+                    $('.ticketauto_btn').click(function () {
+                        $('#ticket_auto_mini').html("");
+                        $.ajax({
+                            url: "/manage/ticket_auto_list",
+                            type: "post",
+                            data: $('.ticauto_type').val(),
+                            success: function (data) {
+                                var listTotal = data.Lines; // 数据总条数
+                                var listArr = []; // 数据按每页分组后存放数组
+                                // 限制每页显示条数
+                                for (var i = 0,len = listTotal.length; i < len; i += 10) {
+                                    listArr.push(data.Lines.slice(i, i+10))
+                                }
+                                console.log(listArr);
+                                var laypage = layui.laypage;
+                                laypage.render({
+                                    elem: 'lay-page-10'
+                                    ,count: listTotal.length
+                                    ,limit: 10
+                                    ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                                    // 分页被触发时 回调函数 第一次加载时触发第一页
+                                    ,jump: function(obj){
+                                        $('#ticket_auto_mini').html("");
+                                        // console.log(obj.curr);
+                                        // 触发分页将分好组的数据遍历
+                                        $.each(listArr[obj.curr - 1], function (index, list) {
+                                            var tBody = '';
+                                            tBody += "<tr>" +
+                                                "<td>"+list.Account+"</td>" +
+                                                "<td>"+list.TicketNum+"</td>" +
+                                                "<td>"+list.TicketType+"</td>" +
+                                                "<td>"+list.TicketQi+"</td>" +
+                                                "<td>"+list.TicketAwards+"</td>" +
+                                                "<td>"+list.TicketMoney+"</td>" +
+                                                "<td>"+list.TaxMoney+"</td>" +
+                                                "<td class='daikaijiang'>"+list.State+"</td>" +
+                                                "<td>"+"详情"+"</td>" +
+                                                "</tr>";
+                                            $('#ticket_auto_mini').append(tBody)
+                                        })
+                                    }
+                                });
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        })
+                    });
 
                 },
                 error: function (err) {
@@ -591,10 +648,10 @@
                 }
             });
         });
-        $('.ticketauto_btn').click(function () {
+        // 点击搜索更新表格信息
+        /*$('.ticketauto_btn').click(function () {
             console.log($('.ticauto_type').val());
-
-        });
+        });*/
 
         /********************特殊派奖********************/
         layui.use('laypage', function(){
