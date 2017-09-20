@@ -446,7 +446,7 @@
             //执行一个laypage实例
             laypage.render({
                 elem: 'lay-page-2'
-                ,count: 99
+                ,count: ''
                 ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                 ,jump: function(obj){
 
@@ -454,23 +454,50 @@
             });
         });
         $('.useraccder_btn').click(function () {
+            $('#useraccdet_mini').html("");
             var result = query('.laydate3', '.laydate4', '.useracc_tickettype', '.useracc_phone');
-            $.ajax({
-                url: '/manage/user_account_detail',
-                type: "post",
-                data: result,
-                success: function (data) {
-                    console.log(data);
-                    var arr = [];
-                    $.each(data, function (index, item) {
-                        console.log(item);
-                        
-                    })
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            })
+            if (result) {
+                $.ajax({
+                    url: '/manage/user_account_detail',
+                    type: "post",
+                    data: result,
+                    success: function (data) {
+                        var listTotal = data.Lines; // 数据总条数
+                        var listArr = []; // 数据按每页分组后存放数组
+                        // 限制每页显示条数
+                        for (var i = 0,len = listTotal.length; i < len; i += 13) {
+                            listArr.push(data.Lines.slice(i, i+14))
+                        }
+                        var laypage = layui.laypage;
+                        laypage.render({
+                            elem: 'lay-page-2'
+                            ,count: listTotal.length
+                            ,limit: 14
+                            ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                            // 分页被触发时 回调函数 第一次加载时触发第一页
+                            ,jump: function(obj){
+                                $('#useraccdet_mini').html("");
+                                // console.log(obj.curr);
+                                // 触发分页将分好组的数据遍历
+                                $.each(listArr[obj.curr - 1], function (index, list) {
+                                    var tBody = '';
+                                    tBody += "<tr>" +
+                                        "<td>"+list.Account+"</td>" +
+                                        "<td>"+list.OrderNum+"</td>" +
+                                        "<td>"+list.Xxx+"</td>" +
+                                        "<td>"+list.Limit+"</td>" +
+                                        "<td>"+list.Time+"</td>" +
+                                        "</tr>";
+                                    $('#useraccdet_mini').append(tBody)
+                                })
+                            }
+                        });
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }
         });
         /********************出票详情********************/
         // 判断状态码 更新进度条 0 1 2 3
@@ -565,7 +592,8 @@
             });
         });
         $('.ticketauto_btn').click(function () {
-            console.log($('.ticauto_type').val()); 
+            console.log($('.ticauto_type').val());
+
         });
 
         /********************特殊派奖********************/

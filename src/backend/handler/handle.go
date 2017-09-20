@@ -82,6 +82,17 @@ func UserDetail(ctx *iris.Context) {
 	})
 }
 
+type line struct {
+	Account  string
+	OrderNum string
+	Xxx      string
+	Limit    string
+	Time     string
+}
+type table struct {
+	Lines []*line
+}
+
 // 用户账户详情
 func UserAccountDetail(ctx *iris.Context) {
 	var u statistics
@@ -90,25 +101,20 @@ func UserAccountDetail(ctx *iris.Context) {
 		fmt.Println(err)
 	}
 	fmt.Println(u)
-	ctx.JSON(iris.StatusOK, iris.Map{
-		"wx1": [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		/*"account":      "zhang",
-		"phone":        13412341234,
-		"balance":      32,
-		"earn":         500,
-		"registerTime": "15-3-5",
-		"infoMsg":      "已完善",
-		"id":           1231254345,*/
-		"wx2":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx3":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx4":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx5":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx6":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx7":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx8":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx9":  [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-		"wx10": [...]string{"zhang", "13412341234", "32", "500", "15-3-5", "已完善", "1231254345"},
-	})
+
+	var t table
+	t.Lines = make([]*line, 0, 10)
+	l := &line{
+		Account:  "zhang",
+		OrderNum: "234234234234",
+		Xxx:      "24",
+		Limit:    "500",
+		Time:     "17-4-3",
+	}
+	for i := 0; i < 100; i++ {
+		t.Lines = append(t.Lines, l)
+	}
+	ctx.JSON(iris.StatusOK, t)
 }
 
 type platform_activity struct {
