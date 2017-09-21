@@ -123,6 +123,56 @@ type platform_activity struct {
 	EndDate   string `form:"endDate"`
 }
 
+// 中奖派奖
+type ticket_win struct {
+	Account      string
+	TicketNum    string
+	TicketType   string
+	TicketQi     string
+	TicketAwards string
+	TicketMoney  string
+	TaxMoney     string
+	State        string
+}
+type ticket_win_table struct {
+	Lines []*ticket_win
+}
+
+type query struct {
+	StartDate   string `form:"startDate"`
+	EndDate     string `form:"endDate"`
+	CheckType   string `form:"checktype"`
+	PhoneNumber string `form:"phoneNumber"`
+	CurrPage    string `form:"currPage"`
+}
+
+// 中奖派奖
+func TicketWin(ctx *iris.Context) {
+	var d query
+	err := ctx.ReadForm(&d)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(d)
+	var t ticket_win_table
+	t.Lines = make([]*ticket_win, 0, 10)
+	l := &ticket_win{
+		Account:      "liu",
+		TicketNum:    "23423423423",
+		TicketType:   "23423423423",
+		TicketQi:     "23423423423",
+		TicketAwards: "一等奖",
+		TicketMoney:  "23423423423",
+		TaxMoney:     "23423423423",
+		State:        "待开奖",
+	}
+	for i := 0; i < 234; i++ {
+		t.Lines = append(t.Lines, l)
+	}
+	ctx.JSON(iris.StatusOK, t)
+
+}
+
 // 自动派奖获得期次
 func TicketAuto(ctx *iris.Context) {
 	ctx.JSON(iris.StatusOK, iris.Map{
@@ -131,6 +181,7 @@ func TicketAuto(ctx *iris.Context) {
 
 }
 
+// 自动派奖数据
 type ticket_auto_list struct {
 	Account      string
 	TicketNum    string
@@ -150,6 +201,62 @@ func TicketAutoList(ctx *iris.Context) {
 	var t ticket_auto_list_table
 	t.Lines = make([]*ticket_auto_list, 0, 10)
 	l := &ticket_auto_list{
+		Account:      "liu",
+		TicketNum:    "23423423423",
+		TicketType:   "23423423423",
+		TicketQi:     "23423423423",
+		TicketAwards: "一等奖",
+		TicketMoney:  "23423423423",
+		TaxMoney:     "23423423423",
+		State:        "待开奖",
+	}
+	for i := 0; i < 101; i++ {
+		t.Lines = append(t.Lines, l)
+	}
+	ctx.JSON(iris.StatusOK, t)
+}
+
+// 特殊派奖获得期次
+func TicketSpecial(ctx *iris.Context) {
+	ctx.JSON(iris.StatusOK, iris.Map{
+		"qici": [...]int{20170203, 20170204, 20170205, 20170206, 20170207, 20170208, 20170209},
+	})
+
+}
+
+// 特殊派奖数据
+type ticket_special_list struct {
+	Account      string
+	TicketNum    string
+	TicketType   string
+	TicketQi     string
+	TicketAwards string
+	TicketMoney  string
+	TaxMoney     string
+	State        string
+}
+type ticket_special_qici struct {
+	Qici string `form:"qi"`
+	Page string `form:"currPage"`
+}
+
+type ticket_special_list_table struct {
+	Lines []*ticket_special_list
+}
+
+// 特殊派奖期次列表
+func TicketSpecialList(ctx *iris.Context) {
+
+	var q ticket_special_qici
+	err := ctx.ReadForm(&q)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(q)
+
+	var t ticket_special_list_table
+	t.Lines = make([]*ticket_special_list, 0, 10)
+	l := &ticket_special_list{
 		Account:      "liu",
 		TicketNum:    "23423423423",
 		TicketType:   "23423423423",

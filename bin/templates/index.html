@@ -117,14 +117,7 @@
             $('.topboard').css('width', document.documentElement.clientWidth);
         });
         /********************登录********************/
-        $('.login_btn').click(function () {
-           $.ajax({
-               url: "/manage/login",
-               type: "post",
-               data: 
-           })
 
-        });
         /********************退出********************/
         $('.login_out').click(function () {
             layer.confirm('确定退出吗', {
@@ -190,13 +183,16 @@
         * phone: 查询手机号 input 的class名
         * */
 
-        function query(start, end, type, phone) {
+        function query(start, end, type, phone, page) {
             // 起始日期 和 结束日期
             var startDate = start ? $(start).val() : '';
             var endDate = end ? $(end).val() : '';
             // 彩票类型
             var checktype =type ? $(type).children('option:selected').val() : '';
+            // 手机号
             var phoneNumber = phone ? $(phone).val() : '';
+            // 查询当前页
+            var currPage  = page ? page : '';
             if (!startDate || !endDate) {
                 layui.use('layer', function(){
                     var layer = layui.layer;
@@ -212,7 +208,8 @@
                     startDate: startDate,
                     endDate: endDate,
                     checktype: checktype,
-                    phoneNumber: phoneNumber
+                    phoneNumber: phoneNumber,
+                    currPage: currPage
                 }
             }
         }
@@ -470,6 +467,7 @@
                     type: "post",
                     data: result,
                     success: function (data) {
+                        // 全部将数据读取
                         var listTotal = data.Lines; // 数据总条数
                         var listArr = []; // 数据按每页分组后存放数组
                         // 限制每页显示条数
@@ -537,23 +535,45 @@
             });
         });
         $('.ticketwin_btn').click(function () {
-            var result = query('laydate5', 'laydate6', 'ticwin_type', 'ticwin_phone');
+            var result = query('.laydate5', '.laydate6', '.ticwin_type', '.ticwin_phone', 1);
+            var isFirst = false;
             if (result) {
                 // 发请求
-                console.log(result);
-                $.get('/manage/static/data/data.json', function (data) {
-                    console.log(data);
-                    layui.use('laypage', function(){
-                        //执行一个laypage实例
+                $.ajax({
+                    url: '/manage/ticket_win',
+                    type: "post",
+                    data: result,
+                    success: function (data) {
+                        // 点击分页获取对应数据
+                        var listTotal = data.Lines; // 数据总条数
+                        // 默认将第一页数据返回 显示在表格中
+                        var laypage = layui.laypage;
+                        // 执行一个laypage实例
                         laypage.render({
                             elem: 'lay-page-3'
-                            ,count: data.name.length
+                            ,count: listTotal.length
                             ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
                             ,jump: function(obj){
+                                if (isFirst) {
+                                    var result = query('.laydate5', '.laydate6', '.ticwin_type', '.ticwin_phone', obj.curr);
+                                    $.ajax({
+                                        url: '/manage/ticket_win',
+                                        type: 'post',
+                                        data: result,
+                                        success: function (data) {
+                                            // 获取后台分完组的数据
+                                            console.log(data.Lines[obj.curr]);
+                                        }
+                                    });
+                                }
+                                isFirst = true;
                             }
                         });
-                    });
-                })
+                    },
+                    error: function (err) {
+                        console.log(err+"=----");
+                    }
+                });
             }
         });
         // 点击查看详情
@@ -606,7 +626,6 @@
                                 for (var i = 0,len = listTotal.length; i < len; i += 10) {
                                     listArr.push(data.Lines.slice(i, i+10))
                                 }
-                                console.log(listArr);
                                 var laypage = layui.laypage;
                                 laypage.render({
                                     elem: 'lay-page-10'
@@ -665,6 +684,70 @@
                 }
             });
         });
+        // 特殊派奖获得期次
+        $('#ticket_special').click(function () {
+            $('.ticspec_type').html('');
+            $.ajax({
+                url: '/manage/ticket_special',
+                type: 'post',
+                success: function (data) {
+                    var qici = JSON.stringify(data.qici).slice(1, -1).split(",");
+                    $.each(qici, function (index, item) {
+                        var optionD = '';
+                        // 生成下拉列表期次
+                        optionD += '<option value="'+item+'">'+item+'</option>';
+                        $('.ticspec_type').append(optionD)
+                    });
+                    $('.ticketspec_btn').click(function () {
+                            var isFirst = false;
+                        $.ajax({
+                            url: '/manage/ticket_special_list',
+                            type: 'post',
+                            data: {
+                                qi: $('.ticspec_type').val(),
+                                currPage: 1
+                            },
+                            success: function (data) {
+                                // 点击分页获取对应数据
+                                var listTotal = data.Lines; // 数据总条数
+                                // 默认将第一页数据返回 显示在表格中
+                                var laypage = layui.laypage;
+                                // 执行一个laypage实例
+                                laypage.render({
+                                    elem: 'lay-page-11'
+                                    ,count: listTotal.length
+                                    ,layout: [ 'prev', 'page', 'next', 'count', 'skip']
+                                    ,jump: function(obj){
+                                        if (isFirst) {
+                                            $.ajax({
+                                                url: '/manage/ticket_special_list',
+                                                type: 'post',
+                                                data: {
+                                                    qi: $('.ticspec_type').val(),
+                                                    currPage: obj.curr
+                                                },
+                                                success: function (data) {
+                                                    // 获取后台分完组的数据
+                                                    console.log(data.Lines[obj.curr]);
+                                                }
+                                            });
+                                        }
+                                        isFirst = true;
+                                    }
+                                });
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        })
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
         // 特殊派奖状态
         $('#ticket_spec_mini  > tr > td:nth-child(8)').click(function () {
             if ($(this).children('span').hasClass('yipaijiang')) {
