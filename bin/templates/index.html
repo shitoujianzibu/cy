@@ -140,7 +140,7 @@
             $('.firstLevel').html(firstLevel);
             $('.secondLevel').html(' > ' + $(this).children('ul').children('li').children('span:first').text());
             // 点击li 默认选中第一个子li
-            $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item')
+            $($(this).children('ul').children('li').get(0)).addClass('active-item').siblings().removeClass('active-item');
             // 点击父li跳转到默认第一个li
             var classN = $(this).attr('class').slice(4);
             $('.'+classN).show().siblings().hide();
@@ -507,14 +507,14 @@
         });
         /********************出票详情********************/
         // 判断状态码 更新进度条 0 1 2 3
-        var ticOutSm = $('.ticket_out_sm');
+        var $ticOutSm = $('.ticket_out_sm');
 
-        ticOutSm.css("width", "33.33%");
+        $ticOutSm.css("width", "33.33%");
         $('.ticket_out_one').css("background", "#FF605E");
         $('.ticket_out_two').css("background", "#FF605E");
         $('.ticket_out_three').css("background", "#FF605E");
-        ticOutSm.css("width", "66.66%");
-        ticOutSm.css("width", "99.99%");
+        $ticOutSm.css("width", "66.66%");
+        $ticOutSm.css("width", "99.99%");
 
         /********************中奖派奖********************/
         laydate.render({
